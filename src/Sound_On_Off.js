@@ -8,7 +8,6 @@ let someFlag2 = false;
 
 export function soundChange(cam) {
 
-  let count;
   if (cam.position.x > -225 && cam.position.x < 225 && cam.position.z < 1250 && cam.position.z > 750) {
     if (someFlag === false) {
 
@@ -19,7 +18,6 @@ export function soundChange(cam) {
       cam.add(listener);
 
       var sound = new THREE.Audio(listener);
-
 
       audioLoader.load('./assets/sounds/scary_flashback.mp3', function (buffer) {
         sound.setBuffer(buffer);
@@ -41,19 +39,23 @@ export function soundChange(cam) {
       $("#credits p").text(`There is a thing here.`);
     }
   } else if (cam.position.x > -2500 && cam.position.x < -1750 && cam.position.z < 500 && cam.position.z > -250) {
-    listener = new THREE.AudioListener();
-    cam.add(listener);
+    if (someFlag2 === false) {
+      someFlag2 = true;
+      listener = new THREE.AudioListener();
+      cam.add(listener);
 
-    sound = new THREE.Audio(listener);
-    audioLoader = new THREE.AudioLoader();
+      sound = new THREE.Audio(listener);
+      audioLoader = new THREE.AudioLoader();
 
-    audioLoader.load('./assets/sounds/intro_song.mp3', function (buffer) {
-      sound.setBuffer(buffer);
-      sound.setLoop(false);
-      sound.setVolume(0.2);
-      sound.play();
+      audioLoader.load('./assets/sounds/intro_song.mp3', function (buffer) {
+        sound.setBuffer(buffer);
+        sound.setLoop(false);
+        sound.setVolume(0.2);
+        sound.play();
 
-    });
+      });
+    }
+
 
 
   }
