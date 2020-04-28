@@ -3,22 +3,22 @@ import * as THREE from "three";
 //table
 THREE.table = function (SCALE, HEIGHT, PositionX, PositionZ) {
   var tableBoardGeometry = new THREE.CubeGeometry(SCALE, SCALE / 10, SCALE);
-  var tableBoardMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wood1.jpg") });
+  var tableBoardMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/woodtable1.jpg") });
   var tableBoard = new THREE.Mesh(tableBoardGeometry, tableBoardMaterial);
   tableBoard.position.x = PositionX;
   tableBoard.position.y = HEIGHT;
   tableBoard.position.z = PositionZ;
 
   const tableLegsGeometry = new THREE.CubeGeometry(SCALE / 10, tableBoard.position.y, SCALE / 10);
-  const tableLegsMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wood1.jpg") });
+  const tableLegsMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/woodtable1.jpg") });
   const tableLeg1 = new THREE.Mesh(tableLegsGeometry, tableLegsMaterial);
   const tableLeg2 = new THREE.Mesh(tableLegsGeometry, tableLegsMaterial);
   const tableLeg3 = new THREE.Mesh(tableLegsGeometry, tableLegsMaterial);
   const tableLeg4 = new THREE.Mesh(tableLegsGeometry, tableLegsMaterial);
-  tableLeg1.position.set(SCALE / 4, -(tableBoard.position.y / 2), SCALE / 4);
-  tableLeg2.position.set(- SCALE / 4, - (tableBoard.position.y / 2), SCALE / 4);
-  tableLeg3.position.set(SCALE / 4, - (tableBoard.position.y / 2), -SCALE / 4);
-  tableLeg4.position.set(-SCALE / 4, - (tableBoard.position.y / 2), -SCALE / 4);
+  tableLeg1.position.set(SCALE / 2.5, -(tableBoard.position.y / 2), SCALE / 3);
+  tableLeg2.position.set(- SCALE / 2.5, - (tableBoard.position.y / 2), SCALE / 3);
+  tableLeg3.position.set(SCALE / 2.5, - (tableBoard.position.y / 2), -SCALE / 3);
+  tableLeg4.position.set(-SCALE / 2.5, - (tableBoard.position.y / 2), -SCALE / 3);
 
   tableBoard.add(tableLeg1);
   tableBoard.add(tableLeg2);
@@ -92,7 +92,7 @@ THREE.wall = function (Xcoord1, Xcoord2, Zcoord1, Zcoord2, HEIGHT) {
   wallpiece.position.set((Xcoord2 - Xcoord1) / 2, HEIGHT / 2, (Zcoord2 - Zcoord1) / 2);
   return wallpiece;
 }
-
+// surgery table
 THREE.surgeryTable = function (PositionX, PositionY, PositionZ, Orientation) {
 
 
@@ -168,7 +168,61 @@ THREE.surgeryTable = function (PositionX, PositionY, PositionZ, Orientation) {
   return base
 
 }
+//tools table
+THREE.toolsTable = function (PositionX, PositionY, PositionZ, Orientation) {
 
+  let toolsBaseGeo = new THREE.BoxGeometry(50 * 1.5, 8 * 1.5, 70 * 1.5);
+  let toolsBaseMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') });
+  let toolsBase = new THREE.Mesh(toolsBaseGeo, toolsBaseMesh)
+  toolsBase.position.set(PositionX, PositionY, PositionZ)
+  toolsBase.rotateY(Orientation)
+
+  let toolsStalkGeo = new THREE.CylinderGeometry(4 * 1.5, 4 * 1.5, 130 * 1.5)
+  let toolsStalkMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') })
+  let toolsStalk = new THREE.Mesh(toolsStalkGeo, toolsStalkMesh)
+  toolsStalk.position.set(0, 65 * 1.5, 25 * 1.5)
+
+  let toolsBinGeo = new THREE.BoxGeometry(60 * 1.5, 4 * 1.5, 45 * 1.5)
+  let toolsBinMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/surgerytools.jpg') })
+  let toolsBin = new THREE.Mesh(toolsBinGeo, toolsBinMesh)
+  toolsBin.position.set(0 * 1.5, 130 * 1.5, 5 * 1.5)
+
+  let toolsLipFrontGeo = new THREE.CylinderGeometry(4 * 1.5, 4 * 1.5, 60 * 1.5, 3, 6, false, 7.8, 3.2)
+  let toolsLipMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/slab2.jpg') })
+  let toolsLipFront = new THREE.Mesh(toolsLipFrontGeo, toolsLipMesh)
+  toolsLipFront.rotateZ(Math.PI / 2)
+  toolsLipFront.position.set(0, 0, -22.5 * 1.5)
+
+  let toolsLipBackGeo = new THREE.CylinderGeometry(4 * 1.5, 4 * 1.5, 60 * 1.5, 3, 6, false, 4.6, 3.2)
+  let toolsLipBack = new THREE.Mesh(toolsLipBackGeo, toolsLipMesh)
+  toolsLipBack.rotateZ(Math.PI / 2)
+  toolsLipBack.position.set(0, 0, 22.5 * 1.5)
+
+  let toolsLipRightGeo = new THREE.CylinderGeometry(4 * 1.5, 4 * 1.5, 45 * 1.5, 3, 6, false, 4.6, 3.2)
+  let toolsLipRight = new THREE.Mesh(toolsLipRightGeo, toolsLipMesh)
+  toolsLipRight.rotateZ(Math.PI / 2)
+  toolsLipRight.rotateX(Math.PI / 2)
+  toolsLipRight.position.set(30 * 1.5, 0, 0)
+
+  let toolsLipLeftGeo = new THREE.CylinderGeometry(4 * 1.5, 4 * 1.5, 45 * 1.5, 3, 6, false, 3, 3.2)
+  let toolsLipLeft = new THREE.Mesh(toolsLipLeftGeo, toolsLipMesh)
+
+  toolsLipLeft.rotateX(Math.PI / 2)
+  toolsLipLeft.position.set(-30 * 1.5, 0, 0)
+
+  toolsBin.add(toolsLipLeft)
+  toolsBin.add(toolsLipRight)
+  toolsBin.add(toolsLipBack)
+  toolsBin.add(toolsLipFront)
+  toolsBase.add(toolsBin)
+  toolsBase.add(toolsStalk)
+
+  return toolsBase
+
+}
+
+
+// key
 THREE.key = function (PositionX, PositionY, PositionZ, Orientation) {
 
   let keyRingGeo = new THREE.TorusGeometry(10, 3, 3, 100);

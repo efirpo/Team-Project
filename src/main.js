@@ -3,11 +3,11 @@ import "./Story.js";
 import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
-import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg";
+import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg"; import './images/woodtable1.jpg'
 //wheelchair textures 
 import "./images/wheelchair/wheel.png"; import './images/wheelchair/tire.png'; import './images/wheelchair/leather.jpg'; import './images/wheelchair/back.jpeg'; import './images/wheelchair/steel1.jpeg';
 //surgery table textures
-import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'
+import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg'
 // key textures
 import './images/gold.jpg'
 
@@ -227,6 +227,9 @@ function setupScene() {
 
 	var key = new t.key(1882, 300, 192, 3)
 	scene.add(key)
+
+	var toolsTable = new t.toolsTable(791, 4, -926, 2)
+	scene.add(toolsTable)
 }
 
 function distance(x1, y1, x2, y2) {
