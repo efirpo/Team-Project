@@ -1,4 +1,9 @@
-
+import * as THREE from 'three';
+import "./Story.js";
+import {table} from "./Models.js";
+import "./Three.FirstPersonControls";
+import $ from "jquery";
+//import * as url from "./../images/tiledfloor.jpg";
 
 /**
  * Notes:
@@ -7,7 +12,7 @@
  */
 
 
-var map =
+export var map =
 	[ // 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 0
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 1
@@ -34,7 +39,7 @@ var map =
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
-	], mapW = map.length, mapH = map[0].length;
+	], mapW = map.length;
 
 // Semi-constants
 var WIDTH = window.innerWidth,
@@ -76,6 +81,7 @@ function init() {
 	// Handle drawing as WebGL (faster than Canvas but less supported)
 	renderer = new t.WebGLRenderer();
 	renderer.setSize(WIDTH, HEIGHT);
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 
 	// Add the canvas to the document
@@ -112,6 +118,7 @@ function animate() {
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
 	checkStoryTriggers();
+	
 
 
 
@@ -131,75 +138,83 @@ function render() {
 	renderer.render(scene, cam); // Repaint
 
 	// Death
-	if (health <= 0) {
-		runAnim = false;
-		$(renderer.domElement).fadeOut();
-		$('#radar, #hud, #credits').fadeOut();
-		$('#intro').fadeIn();
-		$('#intro').html('Ouch! Click to restart...');
-		$('#intro').one('click', function () {
-			location = location;
-		});
-	}
+	// if (health <= 0) {
+	// 	runAnim = false;
+	// 	$(renderer.domElement).fadeOut();
+	// 	$('#radar, #hud, #credits').fadeOut();
+	// 	$('#intro').fadeIn();
+	// 	$('#intro').html('Ouch! Click to restart...');
+	// 	$('#intro').one('click', function () {
+	// 		location = location;
+	// 	});
+	// }
 }
 
 // Set up the objects in the world
 function setupScene() {
 	var UNITSIZE = 250, units = mapW;
 
+	//var texture = new THREE.TextureLoader().load( './images/tiledfloor.jpg' );
+
+	// // immediately use the texture for material creation
+	// var material = new THREE.MeshBasicMaterial( { map: texture } );
+
+
 	// Geometry: floor
 	var floor = new t.Mesh(
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
-		new t.MeshLambertMaterial({/*color: 0xFFFFFF*/map: t.ImageUtils.loadTexture('images/tiledfloor.jpg') }),
+		new t.MeshBasicMaterial({ map: t.ImageUtils.loadTexture("./src/images/tiledfloor.jpg") }),
 	);
 	scene.add(floor);
 
 	// Geometry: ceiling
 	var ceiling = new t.Mesh(
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
-		new t.MeshLambertMaterial({/*color: 0xFFFFFF*/map: t.ImageUtils.loadTexture('images/tiledfloor.jpg') }),
+		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./images1/tiledfloor.jpg") }),
 	);
 	ceiling.position.y = 750;
 	scene.add(ceiling);
 
 
-	// Geometry: walls
-	var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
-	var materials = [
-		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture('images/wallb.jpg') }),
-		new t.MeshLambertMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('images/door1.jpg') }),
-		new t.MeshLambertMaterial({ color: 0xFBEBCD }),
-		new t.MeshLambertMaterial({}),
-	];
-	for (var i = 0; i < mapW; i++) {
-		for (var j = 0, m = map[i].length; j < m; j++) {
-			if (map[i][j]) {
-				var wall = new t.Mesh(cube, materials[map[i][j] - 1]);
-				wall.position.x = (i - units / 2) * UNITSIZE;
-				wall.position.y = WALLHEIGHT / 2;
-				wall.position.z = (j - units / 2) * UNITSIZE;
-				scene.add(wall);
-			}
-		}
-	}
+	//Geometry: walls
+	// var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
+	// var materials = [
+	// 		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
+	// 		new t.MeshLambertMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
+	// 		new t.MeshLambertMaterial({ color: 0xFBEBCD }),
+	// 	new t.MeshLambertMaterial({}),
+	// ];
+	// for (var i = 0; i < mapW; i++) {
+	// 	for (var j = 0, m = map[i].length; j < m; j++) {
+	// 		if (map[i][j]) {
+	// 			var wall = new t.Mesh(cube, materials[map[i][j] - 1]);
+	// 			wall.position.x = (i - units / 2) * UNITSIZE;
+	// 			wall.position.y = WALLHEIGHT / 2;
+	// 			wall.position.z = (j - units / 2) * UNITSIZE;
+	// 			scene.add(wall);
+	// 		}
+	// 	}
+	// }
 
+	
 	var table = new t.table(400, 200, 1875, 250);
+	scene.add(table);
+
+	table = new t.table(250, 150, 625, -2125);
 	scene.add(table);
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
-	table = new t.table(250, 150, 625, -2125);
-	scene.add(table);
-
 
 	// Lighting
-	var directionalLight2 = new t.DirectionalLight(0xF7EFBE, 0.5);
-	directionalLight2.position.set(0, 1, 0);
-	scene.add(directionalLight2);
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	directionalLight.position.set(0, -1, 0);
+	scene.add(directionalLight);
 
-	var flashlight = new THREE.SpotLight(0xffffff, 2, 20, Math.PI / 2.5, 1, 1.5);
-	cam.add(flashlight);
-	flashlight.position.set(0, 0, 1);
+	var flashlight = new THREE.SpotLight(0xffffff, 20, 20, Math.PI / 2.5, 1, 1.5);
+	flashlight.position.set(cam.position);
 	flashlight.target = cam;
+	scene.add(flashlight);
+
 }
 
 function distance(x1, y1, x2, y2) {
@@ -291,14 +306,50 @@ function getRandBetween(lo, hi) {
 }
 
 $(document).ready(function () {
-	$('body').append('<div id="intro">Click to start</div>');
-	$('#intro').css({ width: WIDTH, height: HEIGHT }).one('click', function (e) {
-		e.preventDefault();
-		$(this).fadeOut();
-		init();
-		setInterval(drawRadar, 1000);
-		animate();
-	});
+	// $('body').append('<div id="intro">Click to start</div>');
+	// $('#intro').css({ width: WIDTH, height: HEIGHT }).one('click', function (e) {
+	// 	e.preventDefault();
+	// 	$(this).fadeOut();
+	init();
+	setInterval(drawRadar, 1000);
+	animate();
+
 
 });
 
+function checkStoryTriggers() {
+	if (cam.position.x < -2900 && cam.position.z > 1000) {
+		const key = "<span id='key'>Key</span>";
+		$("#credits p").text(`There is a ${key} here.`);
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+	else if (cam.position.x > 3000) {
+		console.log("X > 3000");
+	}
+}

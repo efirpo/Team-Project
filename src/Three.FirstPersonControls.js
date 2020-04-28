@@ -1,3 +1,6 @@
+import * as THREE from 'three';
+import {map} from './main.js';
+
 /**
  * @author mrdoob / http://mrdoob.com/
  * @author alteredq / http://alteredqualia.com/
@@ -9,6 +12,9 @@
  * - Changed camera movement in this.update() to respect wall collisions
  * - Changed this.update() to use this.noFly to disallow going up/down with R/F
  */
+
+var UNITSIZE = 250, mapW = 25;
+
 
 THREE.FirstPersonControls = function (object, domElement) {
 
@@ -252,8 +258,8 @@ THREE.FirstPersonControls = function (object, domElement) {
 
 			this.lon += this.mouseX * actualLookSpeed;
 			if (this.lookVertical) {
-				this.lat -= this.mouseY * actualLookSpeed
-			};
+				this.lat -= this.mouseY * actualLookSpeed;
+			}
 			// * this.invertVertical?-1:1;
 
 			this.lat = Math.max(- 85, Math.min(85, this.lat));
@@ -294,8 +300,8 @@ THREE.FirstPersonControls = function (object, domElement) {
 
 		}
 
-		var targetPosition = this.target,
-			position = this.object.position;
+		// var targetPosition = this.target,
+		// 	position = this.object.position;
 
 		targetPosition.x = position.x + 100 * Math.sin(this.phi) * Math.cos(this.theta);
 		targetPosition.y = position.y + 100 * Math.cos(this.phi);
@@ -322,6 +328,17 @@ THREE.FirstPersonControls = function (object, domElement) {
 
 		};
 
-	};
+	}
 
 };
+
+function checkWallCollision(v) {
+	var c = getMapSector(v);
+	return map[c.x][c.z] > 0;
+}
+
+function getMapSector(v) {
+	var x = Math.floor((v.x + UNITSIZE / 2) / UNITSIZE + mapW / 2);
+	var z = Math.floor((v.z + UNITSIZE / 2) / UNITSIZE + mapW / 2);
+	return { x: x, z: z };
+}
