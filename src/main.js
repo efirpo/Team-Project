@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { checkStoryTriggers } from "./Story.js";
 import { soundChange } from "./Sound_On_Off.js";
+import { soundOn } from "./Sound_On_Off.js";
 import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
@@ -50,7 +51,7 @@ var WIDTH = window.innerWidth,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
 	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 1000,
+	MOVESPEED = 700,
 	LOOKSPEED = 0.075
 
 
@@ -259,8 +260,13 @@ function setupScene() {
 	scene.add(table);
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
-	var wheelchair = new t.wheelchair(1500, 100, 500, 3);
+
+	var wheelchair = new t.wheelchair(120, 20, 500, 3);
 	scene.add(wheelchair);
+
+	// soundOn(wheelchair, cam);
+
+
 
 
 }
