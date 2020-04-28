@@ -35,7 +35,7 @@ export var map =
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 18
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 19
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 20
-		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 2, 2, 1, 0, 0, 1], // 21
+		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 21
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
@@ -59,7 +59,7 @@ var runAnim = true, mouse = { x: 0, y: 0 };
 function init() {
 	clock = new t.Clock(); // Used in render() for controls.update()
 	scene = new t.Scene(); // Holds all objects in the canvas
-	scene.fog = new t.FogExp2(0x303030, 0.0005); // color, density
+	scene.fog = new t.FogExp2(0x000000, 0.0005); // color, density
 
 	// Set up camera
 	cam = new t.PerspectiveCamera(60, ASPECT, 1, 10000); // FOV, aspect, near, far
@@ -118,6 +118,8 @@ function animate() {
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
 	checkStoryTriggers();
+	scene.children[203].position.x = cam.position.x;
+	scene.children[203].position.z = cam.position.z;
 	
 
 
@@ -153,12 +155,6 @@ function render() {
 // Set up the objects in the world
 function setupScene() {
 	var UNITSIZE = 250, units = mapW;
-
-	//var texture = new THREE.TextureLoader().load( './images/tiledfloor.jpg' );
-
-	// // immediately use the texture for material creation
-	// var material = new THREE.MeshBasicMaterial( { map: texture } );
-
 
 	// Geometry: floor
 	var floor = new t.Mesh(
@@ -206,12 +202,12 @@ function setupScene() {
 	scene.add(table);
 
 	// Lighting
-	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-	directionalLight.position.set(0, -1, 0);
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
+	directionalLight.position.set(0, 1, 0);
 	scene.add(directionalLight);
 
-	var flashlight = new THREE.SpotLight(0xffffff, .5);
-	flashlight.position.set(1100, 650, 320);
+	var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
+	flashlight.position.set(1100, 525, 320);
 	flashlight.target = cam;
 	scene.add(flashlight);
 
