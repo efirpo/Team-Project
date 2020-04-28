@@ -1,9 +1,13 @@
 import * as THREE from 'three';
-import "./Story.js";
+import { checkStoryTriggers } from "./Story.js";
+import { soundChange } from "./Sound_On_Off.js";
+import { soundOn } from "./Sound_On_Off.js";
 import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
 import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg";
+import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
+import { CameraHelper } from 'three';
 
 /**
  * Notes:
@@ -21,23 +25,23 @@ export var map =
 		[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 4
 		[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 5
 		[1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 6
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 7
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 8
+		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 7
+		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 8
 		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 9
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 10
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 10
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 11
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], // 12
+		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 12
 		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], // 13
 		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 14
 		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 15
 		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 16
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 17
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 18
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 19
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 20
-		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 21
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
+		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 17
+		[1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 18
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 19
+		[1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1], // 20
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 21
+		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
+		[1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
 	], mapW = map.length;
 
@@ -47,12 +51,12 @@ var WIDTH = window.innerWidth,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
 	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 1000,
+	MOVESPEED = 700,
 	LOOKSPEED = 0.075
 
 
 // Global vars
-var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin;
+var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin, listener;
 var runAnim = true, mouse = { x: 0, y: 0 };
 
 $(document).ready(function() {
@@ -89,8 +93,35 @@ function init() {
 	controls.lookVertical = false; // Temporary solution; play on flat surfaces only
 	controls.noFly = true;
 
+	// listener = new t.AudioListener();
+	// console.log(listener);
+	// cam.add(listener);
+
+
+	// var listener = new THREE.AudioListener();
+	// cam.add(listener);
+
+	// var sound = new THREE.Audio(listener);
+
+	// var audioLoader = new THREE.AudioLoader();
+
+	// var loaderLoader = new THREE.AudioLoader();
+
 	// World objects
 	setupScene();
+
+
+
+	// audioLoader.load('./assets/sounds/ambient_song.mp3', function (buffer) {
+	// 	sound.setBuffer(buffer);
+	// 	sound.setLoop(true);
+	// 	sound.setVolume(0.5);
+	// 	sound.play();
+	// });
+
+
+
+
 
 	// Handle drawing as WebGL (faster than Canvas but less supported)
 	renderer = new t.WebGLRenderer();
@@ -120,6 +151,21 @@ function init() {
 	$('#hurt').css({ width: WIDTH, height: HEIGHT, });
 }
 
+// create an AudioListener and add it to the camera
+
+// // create a global audio source
+// console.log(listener);
+// var sound = new t.Audio(listener);
+
+// // load a sound and set it as the Audio object's buffer
+// var audioLoader = new t.AudioLoader();
+// audioLoader.load('./sounds/scary_flashback.mp3', function (buffer) {
+// 	sound.setBuffer(buffer);
+// 	sound.setLoop(true);
+// 	sound.setVolume(0.5);
+// 	sound.play();
+// });
+
 // Helper function for browser frames
 function animate() {
 	if (runAnim) {
@@ -131,10 +177,11 @@ function animate() {
 // Update and display
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
-	checkStoryTriggers();
+	checkStoryTriggers(cam);
+	soundChange(cam);
 	scene.children[1].position.x = cam.position.x;
 	scene.children[1].position.z = cam.position.z;
-	
+
 
 
 
@@ -170,18 +217,18 @@ function render() {
 function setupScene() {
 	var UNITSIZE = 250, units = mapW;
 
-		// Lighting
-		var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
-		flashlight.position.set(1100, 525, 320);
-		flashlight.target = cam;
-		scene.add(flashlight);
-	
+	// Lighting
+	var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
+	flashlight.position.set(1100, 525, 320);
+	flashlight.target = cam;
+	scene.add(flashlight);
 
-		var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
-		directionalLight.position.set(0, 1, 0);
-		scene.add(directionalLight);
-	
-	
+
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
+	directionalLight.position.set(0, 1, 0);
+	scene.add(directionalLight);
+
+
 
 	// Geometry: floor
 	var floor = new t.Mesh(
@@ -202,9 +249,9 @@ function setupScene() {
 	//Geometry: walls
 	var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
 	var materials = [
-			new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/wallb.jpg") }),
-			new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
-			new t.MeshLambertMaterial({ color: 0xFBEBCD }),
+		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/wallb.jpg") }),
+		new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
+		new t.MeshLambertMaterial({ color: 0xFBEBCD }),
 
 	];
 	for (var i = 0; i < mapW; i++) {
@@ -219,16 +266,21 @@ function setupScene() {
 		}
 	}
 
-	
-	var table = new t.table(400, 200, 1875, 250);
+
+	var table = new t.table(400, 200, 1875, 0);
 	scene.add(table);
 
 	table = new t.table(250, 150, 625, -2125);
 	scene.add(table);
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
-	var wheelchair = new t.wheelchair(1500, 100, 500, 3);
+
+	var wheelchair = new t.wheelchair(120, 20, 500, 3);
 	scene.add(wheelchair);
+
+	// soundOn(wheelchair, cam);
+
+
 
 
 }
@@ -333,39 +385,3 @@ $(document).ready(function () {
 
 });
 
-function checkStoryTriggers() {
-	if (cam.position.x < -2900 && cam.position.z > 1000) {
-		const key = "<span id='key'>Key</span>";
-		$("#credits p").text(`There is a ${key} here.`);
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-	else if (cam.position.x > 3000) {
-		console.log("X > 3000");
-	}
-}

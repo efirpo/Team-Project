@@ -23,9 +23,9 @@ module.exports = {
       title: 'blank',
       template: './src/index.html',
       inject: 'body',
-    
+
     })
-    
+
   ],
   module: {
     rules: [
@@ -53,9 +53,22 @@ module.exports = {
           }
         ]
       },
-      
+
       {
-        test:/\.html$/,
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/sounds/'
+            }
+          }
+        ]
+      },
+
+      {
+        test: /\.html$/,
         use: [
           'html-loader'
         ]
