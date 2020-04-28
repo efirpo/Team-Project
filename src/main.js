@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { checkStoryTriggers } from "./Story.js";
+import { soundChange } from "./Sound_On_Off.js";
 import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
@@ -82,25 +83,26 @@ function init() {
 	// cam.add(listener);
 
 
-	var listener = new THREE.AudioListener();
-	cam.add(listener);
+	// var listener = new THREE.AudioListener();
+	// cam.add(listener);
 
-	var sound = new THREE.Audio(listener);
+	// var sound = new THREE.Audio(listener);
 
-	var audioLoader = new THREE.AudioLoader();
+	// var audioLoader = new THREE.AudioLoader();
 
-	var loaderLoader = new THREE.AudioLoader();
+	// var loaderLoader = new THREE.AudioLoader();
+
 	// World objects
 	setupScene();
 
 
 
-	audioLoader.load('./assets/sounds/ambient_song.mp3', function (buffer) {
-		sound.setBuffer(buffer);
-		sound.setLoop(true);
-		sound.setVolume(0.5);
-		sound.play();
-	});
+	// audioLoader.load('./assets/sounds/ambient_song.mp3', function (buffer) {
+	// 	sound.setBuffer(buffer);
+	// 	sound.setLoop(true);
+	// 	sound.setVolume(0.5);
+	// 	sound.play();
+	// });
 
 
 
@@ -161,6 +163,7 @@ function animate() {
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
 	checkStoryTriggers(cam);
+	soundChange(cam);
 	scene.children[1].position.x = cam.position.x;
 	scene.children[1].position.z = cam.position.z;
 
