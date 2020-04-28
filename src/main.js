@@ -118,8 +118,8 @@ function animate() {
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
 	checkStoryTriggers();
-	scene.children[203].position.x = cam.position.x;
-	scene.children[203].position.z = cam.position.z;
+	scene.children[1].position.x = cam.position.x;
+	scene.children[1].position.z = cam.position.z;
 	
 
 
@@ -155,6 +155,19 @@ function render() {
 // Set up the objects in the world
 function setupScene() {
 	var UNITSIZE = 250, units = mapW;
+
+		// Lighting
+		var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
+		flashlight.position.set(1100, 525, 320);
+		flashlight.target = cam;
+		scene.add(flashlight);
+	
+
+		var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
+		directionalLight.position.set(0, 1, 0);
+		scene.add(directionalLight);
+	
+	
 
 	// Geometry: floor
 	var floor = new t.Mesh(
@@ -201,15 +214,6 @@ function setupScene() {
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
 
-	// Lighting
-	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
-	directionalLight.position.set(0, 1, 0);
-	scene.add(directionalLight);
-
-	var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
-	flashlight.position.set(1100, 525, 320);
-	flashlight.target = cam;
-	scene.add(flashlight);
 
 }
 
