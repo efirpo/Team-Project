@@ -171,22 +171,22 @@ function setupScene() {
 	scene.add(flashlight);
 
 
-	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
-	directionalLight.position.set(0, 1, 0);
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	directionalLight.position.set(2, 1, 2);
 	scene.add(directionalLight);
 
 
 
 	// Geometry: floor
 	var floor = new t.Mesh(
-		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
+		new t.BoxBufferGeometry(units * UNITSIZE, 10, units * UNITSIZE),
 		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
 	scene.add(floor);
 
 	// Geometry: ceiling
 	var ceiling = new t.Mesh(
-		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
+		new t.BoxBufferGeometry(units * UNITSIZE, 10, units * UNITSIZE),
 		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
 	ceiling.position.y = 750;
@@ -194,7 +194,7 @@ function setupScene() {
 
 
 	//Geometry: walls
-	var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
+	var cube = new t.BoxBufferGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
 	var materials = [
 		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/bricksseamless.jpg") }),
 		new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/bricksseamless.jpg') }),
@@ -221,7 +221,7 @@ function setupScene() {
 	scene.add(table);
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
-	var wheelchair = new t.wheelchair(1500, 180, 500, 3);
+	var wheelchair = new t.wheelChair(1500, 180, 500, 3);
 	scene.add(wheelchair);
 
 	var surgeryTable = new t.surgeryTable(824, 65, -606, 2)
@@ -235,6 +235,8 @@ function setupScene() {
 
 	var door1 = new t.doorSimple(2458, 400, -1012, 1)
 	scene.add(door1)
+
+
 }
 
 function distance(x1, y1, x2, y2) {
