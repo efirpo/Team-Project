@@ -4,6 +4,7 @@ import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
 import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg";
+import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import { CameraHelper } from 'three';
 
 /**
@@ -53,7 +54,7 @@ var WIDTH = window.innerWidth,
 
 
 // Global vars
-var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin;
+var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin, listener;
 var runAnim = true, mouse = { x: 0, y: 0 };
 
 // Setup
@@ -76,8 +77,34 @@ function init() {
 	controls.lookVertical = false; // Temporary solution; play on flat surfaces only
 	controls.noFly = true;
 
+	// listener = new t.AudioListener();
+	// console.log(listener);
+	// cam.add(listener);
+
+
+	var listener = new THREE.AudioListener();
+	cam.add(listener);
+
+	var sound = new THREE.Audio(listener);
+
+	var audioLoader = new THREE.AudioLoader();
+
+	var loaderLoader = new THREE.AudioLoader();
 	// World objects
 	setupScene();
+
+
+
+	audioLoader.load('./assets/sounds/ambient_song.mp3', function (buffer) {
+		sound.setBuffer(buffer);
+		sound.setLoop(true);
+		sound.setVolume(0.5);
+		sound.play();
+	});
+
+
+
+
 
 	// Handle drawing as WebGL (faster than Canvas but less supported)
 	renderer = new t.WebGLRenderer();
@@ -108,20 +135,19 @@ function init() {
 }
 
 // create an AudioListener and add it to the camera
-var listener = new THREE.AudioListener();
-cam.add(listener);
 
-// create a global audio source
-var sound = new THREE.Audio(listener);
+// // create a global audio source
+// console.log(listener);
+// var sound = new t.Audio(listener);
 
-// load a sound and set it as the Audio object's buffer
-var audioLoader = new THREE.AudioLoader();
-audioLoader.load('sounds/ambient.ogg', function (buffer) {
-	sound.setBuffer(buffer);
-	sound.setLoop(true);
-	sound.setVolume(0.5);
-	sound.play();
-});
+// // load a sound and set it as the Audio object's buffer
+// var audioLoader = new t.AudioLoader();
+// audioLoader.load('./sounds/scary_flashback.mp3', function (buffer) {
+// 	sound.setBuffer(buffer);
+// 	sound.setLoop(true);
+// 	sound.setVolume(0.5);
+// 	sound.play();
+// });
 
 // Helper function for browser frames
 function animate() {

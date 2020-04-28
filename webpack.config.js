@@ -56,13 +56,15 @@ module.exports = {
 
       {
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: 'assets/sounds/'
-
-        }
-
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/sounds/'
+            }
+          }
+        ]
       },
 
       {
