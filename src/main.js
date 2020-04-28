@@ -4,6 +4,12 @@ import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
 import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg";
+//wheelchair textures 
+import "./images/wheelchair/wheel.png"; import './images/wheelchair/tire.png'; import './images/wheelchair/leather.jpg'; import './images/wheelchair/back.jpeg'; import './images/wheelchair/steel1.jpeg';
+//surgery table textures
+import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'
+// key textures
+import './images/gold.jpg'
 
 /**
  * Notes:
@@ -23,19 +29,19 @@ export var map =
 		[1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 6
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 7
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 8
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 9
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 10
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 11
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], // 12
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], // 13
-		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 14
-		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 15
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 16
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 17
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 18
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 19
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 20
-		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 21
+		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 9
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 10
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 11
+		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 12
+		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 13
+		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 14
+		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 15
+		[1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 16
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 17
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 18
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 19
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 20
+		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 21
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
@@ -120,7 +126,7 @@ function render() {
 	checkStoryTriggers();
 	scene.children[1].position.x = cam.position.x;
 	scene.children[1].position.z = cam.position.z;
-	
+
 
 
 
@@ -156,18 +162,18 @@ function render() {
 function setupScene() {
 	var UNITSIZE = 250, units = mapW;
 
-		// Lighting
-		var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
-		flashlight.position.set(1100, 525, 320);
-		flashlight.target = cam;
-		scene.add(flashlight);
-	
+	// Lighting
+	var flashlight = new THREE.PointLight(0xffffff, 1, 1500, 1);
+	flashlight.position.set(1100, 525, 320);
+	flashlight.target = cam;
+	scene.add(flashlight);
 
-		var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
-		directionalLight.position.set(0, 1, 0);
-		scene.add(directionalLight);
-	
-	
+
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
+	directionalLight.position.set(0, 1, 0);
+	scene.add(directionalLight);
+
+
 
 	// Geometry: floor
 	var floor = new t.Mesh(
@@ -188,9 +194,9 @@ function setupScene() {
 	//Geometry: walls
 	var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
 	var materials = [
-			new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/wallb.jpg") }),
-			new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
-			new t.MeshLambertMaterial({ color: 0xFBEBCD }),
+		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/wallb.jpg") }),
+		new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
+		new t.MeshLambertMaterial({ color: 0xFBEBCD }),
 
 	];
 	for (var i = 0; i < mapW; i++) {
@@ -205,7 +211,7 @@ function setupScene() {
 		}
 	}
 
-	
+
 	var table = new t.table(400, 200, 1875, 250);
 	scene.add(table);
 
@@ -213,10 +219,14 @@ function setupScene() {
 	scene.add(table);
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
-	var wheelchair = new t.wheelchair(1500, 100, 500, 3);
+	var wheelchair = new t.wheelchair(1500, 180, 500, 3);
 	scene.add(wheelchair);
 
+	var surgeryTable = new t.surgeryTable(824, 65, -606, 2)
+	scene.add(surgeryTable)
 
+	var key = new t.key(1882, 300, 192, 3)
+	scene.add(key)
 }
 
 function distance(x1, y1, x2, y2) {

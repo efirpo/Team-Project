@@ -30,50 +30,50 @@ THREE.table = function (SCALE, HEIGHT, PositionX, PositionZ) {
 
 //wheelchair
 THREE.wheelchair = function (PositionX, PositionY, PositionZ, Orientation) {
-  let wheelGeo = new THREE.CylinderGeometry(50, 50, 4, 24);
-  let wheelMesh = new THREE.MeshLambertMaterial({ color: 0x0033aa });
+  let wheelGeo = new THREE.CylinderGeometry(50 * 1.8, 50 * 1.8, 4 * 1.8, 24);
+  let wheelMesh = new THREE.MeshPhongMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wheel.png") });
   let wheel1 = new THREE.Mesh(wheelGeo, wheelMesh);
   wheel1.rotateZ(Math.PI / 2);
-  wheel1.position.set(42, -25, -10);
+  wheel1.position.set(42 * 1.8, -25 * 1.8, -10 * 1.8);
   let wheel2 = new THREE.Mesh(wheelGeo, wheelMesh);
   wheel2.rotateZ(Math.PI / 2);
-  wheel2.position.set(-42, -25, -10);
+  wheel2.position.set(-42 * 1.8, -25 * 1.8, -10 * 1.8);
 
-  let tireGeo = new THREE.TorusGeometry(50, 4, 12, 12);
-  let tireMesh = new THREE.MeshLambertMaterial({ color: 0xaacc22 });
+  let tireGeo = new THREE.TorusGeometry(50 * 1.8, 4 * 1.8, 12, 12);
+  let tireMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/tire.png") });
   let tire1 = new THREE.Mesh(tireGeo, tireMesh);
   tire1.rotateY(Math.PI / 2);
-  tire1.position.set(-42, -25, -10);
+  tire1.position.set(-42 * 1.8, -25 * 1.8, -10 * 1.8);
   let tire2 = new THREE.Mesh(tireGeo, tireMesh);
   tire2.rotateY(Math.PI / 2);
-  tire2.position.set(42, -25, -10);
+  tire2.position.set(42 * 1.8, -25 * 1.8, -10 * 1.8);
 
-  let chairSeatGeo = new THREE.BoxGeometry(75, 8, 75);
-  let chairSeatMesh = new THREE.MeshLambertMaterial({ color: 0x00ffdd });
+  let chairSeatGeo = new THREE.BoxGeometry(75 * 1.8, 8 * 1.8, 75 * 1.8);
+  let chairSeatMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/leather.jpg') });
   let chairSeat = new THREE.Mesh(chairSeatGeo, chairSeatMesh);
   chairSeat.position.set(PositionX, PositionY, PositionZ);
   chairSeat.rotateY(Math.PI / Orientation);
 
-  let backGeo = new THREE.BoxGeometry(75, 6, 90);
-  let backMesh = new THREE.MeshLambertMaterial({ color: 0xff00aa });
+  let backGeo = new THREE.BoxGeometry(75 * 1.8, 6 * 1.8, 90 * 1.8);
+  let backMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/back.jpeg') });
   let back = new THREE.Mesh(backGeo, backMesh);
   back.rotateX(Math.PI / 2.8);
-  back.position.set(0, 30, -40);
+  back.position.set(0, 30 * 1.8, -40 * 1.8);
 
-  let handleGeo = new THREE.CylinderGeometry(4, 4, 20, 16);
-  let handleMesh = new THREE.MeshLambertMaterial({ color: 0xaadd33 });
+  let handleGeo = new THREE.CylinderGeometry(4 * 1.8, 4 * 1.8, 20 * 1.8, 16);
+  let handleMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/tire.png") });
   let handleRight = new THREE.Mesh(handleGeo, handleMesh);
   handleRight.rotateX(Math.PI / 2);
-  handleRight.position.set(-35, 60, -65);
+  handleRight.position.set(-35 * 1.8, 60 * 1.8, -65 * 1.8);
 
   let handleLeft = new THREE.Mesh(handleGeo, handleMesh);
   handleLeft.rotateX(Math.PI / 2);
-  handleLeft.position.set(35, 60, -65);
+  handleLeft.position.set(35 * 1.8, 60 * 1.8, -65 * 1.8);
 
-  let axleGeo = new THREE.BoxGeometry(80, 2, 2);
-  let axleMesh = new THREE.MeshLambertMaterial({ color: 0x00ff77 });
+  let axleGeo = new THREE.BoxGeometry(80 * 1.8, 2 * 1.8, 2 * 1.8);
+  let axleMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') });
   let axle = new THREE.Mesh(axleGeo, axleMesh);
-  axle.position.set(0, -30, -10);
+  axle.position.set(0, -30 * 1.8, -10 * 1.8);
 
   chairSeat.add(tire2);
   chairSeat.add(tire1);
@@ -83,12 +83,119 @@ THREE.wheelchair = function (PositionX, PositionY, PositionZ, Orientation) {
   chairSeat.add(back);
   chairSeat.add(wheel1);
   chairSeat.add(wheel2);
-return chairSeat;
+  return chairSeat;
 }
 
 //wall
 THREE.wall = function (Xcoord1, Xcoord2, Zcoord1, Zcoord2, HEIGHT) {
-let wallpiece = new THREE.BoxGeometry((Math.abs(Xcoord2) - Math.abs(Xcoord1)), HEIGHT, (Math.abs(Zcoord2) - Math.abs(Zcoord1)));
-wallpiece.position.set((Xcoord2-Xcoord1)/2, HEIGHT/2,(Zcoord2-Zcoord1)/2 );
-return wallpiece;
+  let wallpiece = new THREE.BoxGeometry((Math.abs(Xcoord2) - Math.abs(Xcoord1)), HEIGHT, (Math.abs(Zcoord2) - Math.abs(Zcoord1)));
+  wallpiece.position.set((Xcoord2 - Xcoord1) / 2, HEIGHT / 2, (Zcoord2 - Zcoord1) / 2);
+  return wallpiece;
+}
+
+THREE.surgeryTable = function (PositionX, PositionY, PositionZ, Orientation) {
+
+
+  var baseGeo = new THREE.CylinderGeometry(80 * 1.5, 100 * 1.5, 40 * 1.5, 12);
+  var baseMat = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') });
+  var base = new THREE.Mesh(baseGeo, baseMat)
+  base.position.set(PositionX, PositionY, PositionZ);
+  base.rotateY(Math.PI / Orientation)
+
+  var connector1Geo = new THREE.CylinderGeometry(5 * 1.5, 5 * 1.5, 140 * 1.5, 240);
+  var connector1Mesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/slab2.jpg') }
+  );
+  var connector1 = new THREE.Mesh(connector1Geo, connector1Mesh);
+  var connector2 = new THREE.Mesh(connector1Geo, connector1Mesh);
+  connector1.rotateX(Math.PI / 4)
+  connector1.position.set(-50 * 1.5, 60 * 1.5, 20 * 1.5)
+  connector2.rotateX(Math.PI / 4)
+  connector2.position.set(50 * 1.5, 60 * 1.5, 20 * 1.5)
+
+  var connector3Geo = new THREE.CylinderGeometry(5 * 1.5, 5 * 1.5, 200 * 1.5, 240);
+  var connector3Mesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') }
+  );
+
+  var connector3 = new THREE.Mesh(connector3Geo, connector3Mesh);
+  var connector4 = new THREE.Mesh(connector3Geo, connector3Mesh)
+  connector3.rotateX(-(Math.PI / 4))
+  connector3.position.set(50 * 1.5, 80 * 1.5, -30 * 1.5)
+  connector4.rotateX(-(Math.PI / 4))
+  connector4.position.set(-50 * 1.5, 80 * 1.5, -30 * 1.5)
+
+  var slabGeo = new THREE.BoxGeometry(150 * 1.5, 8 * 1.5, 300 * 1.5)
+  var slabMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/slab2.jpg') })
+  var slab = new THREE.Mesh(slabGeo, slabMesh)
+  slab.position.set(0, 130 * 1.5, 0)
+  slab.rotateX(Math.PI / 13)
+
+  var headRestGeo = new THREE.BoxGeometry(150 * 1.5, 8 * 1.5, 75 * 1.5)
+  var headRestMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/slab3.jpg') })
+  var headRest = new THREE.Mesh(headRestGeo, headRestMesh)
+  headRest.position.set(0, 180 * 1.5, -170 * 1.5)
+  headRest.rotateX(Math.PI / 7)
+
+  var shackleLegsGeo = new THREE.CylinderGeometry(12 * 1.5, 12 * 1.5, 12 * 1.5, 12, 3, false, 1.4, 3.5)
+  var shackleArmsGeo = new THREE.CylinderGeometry(10 * 1.5, 10 * 1.5, 10 * 1.5, 10, 3, false, 1.4, 3.5)
+  var shackleMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') })
+  var shackleLeftLeg = new THREE.Mesh(shackleLegsGeo, shackleMesh)
+  shackleLeftLeg.position.set(30 * 1.5, 115 * 1.5, 80 * 1.5)
+  shackleLeftLeg.rotateX(Math.PI / 1.5)
+
+  var shackleRightLeg = new THREE.Mesh(shackleLegsGeo, shackleMesh)
+  shackleRightLeg.position.set(-30 * 1.5, 115 * 1.5, 80 * 1.5)
+  shackleRightLeg.rotateX(Math.PI / 1.5)
+
+  var shackleRightArm = new THREE.Mesh(shackleArmsGeo, shackleMesh)
+  shackleRightArm.position.set(-55 * 1.5, 142 * 1.5, -30 * 1.5)
+  shackleRightArm.rotateX(Math.PI / 1.5)
+
+  var shackleLeftArm = new THREE.Mesh(shackleArmsGeo, shackleMesh)
+  shackleLeftArm.position.set(55 * 1.5, 142 * 1.5, -30 * 1.5)
+  shackleLeftArm.rotateX(Math.PI / 1.5)
+
+  base.add(connector1)
+  base.add(connector2)
+  base.add(connector3)
+  base.add(connector4)
+  base.add(slab)
+  base.add(headRest)
+  base.add(shackleLeftLeg)
+  base.add(shackleRightLeg)
+  base.add(shackleRightArm)
+  base.add(shackleLeftArm)
+
+  return base
+
+}
+
+THREE.key = function (PositionX, PositionY, PositionZ, Orientation) {
+
+  let keyRingGeo = new THREE.TorusGeometry(10, 3, 3, 100);
+  let keyRingMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/gold.jpg') })
+  let keyRing = new THREE.Mesh(keyRingGeo, keyRingMaterial);
+  keyRing.position.set(PositionX, PositionY, PositionZ)
+  keyRing.rotateY(Math.PI / Orientation)
+
+  let keyStalkGeo = new THREE.CylinderGeometry(3, 3, 50, 14)
+  let keyStalkMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/gold.jpg') })
+  let keyStalk = new THREE.Mesh(keyStalkGeo, keyStalkMaterial)
+  keyStalk.rotateX(Math.PI / 2)
+  keyStalk.rotateZ(Math.PI / 2)
+  keyStalk.position.set(35, 0, 0)
+  keyRing.add(keyStalk)
+
+  let keyTooth1Geo = new THREE.BoxGeometry(5, 5, 3)
+  let keyTooth1Mesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/gold.jpg') })
+  let keyTooth1 = new THREE.Mesh(keyTooth1Geo, keyTooth1Mesh)
+  keyTooth1.position.set(40, -5, 0)
+
+  let keyTooth2Geo = new THREE.BoxGeometry(5, 9, 3)
+  let keyTooth2 = new THREE.Mesh(keyTooth2Geo, keyTooth1Mesh)
+  keyTooth2.position.set(50, -5, 0)
+
+  keyRing.add(keyTooth1);
+  keyRing.add(keyTooth2);
+
+  return keyRing
 }
