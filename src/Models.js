@@ -220,6 +220,38 @@ THREE.toolsTable = function (PositionX, PositionY, PositionZ, Orientation) {
   return toolsBase
 
 }
+// door frame
+
+THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
+  let doorGeo = new THREE.BoxGeometry(100 * 2, 250 * 2, 20 * 2)
+  let doorMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/door931-fixed.jpg') })
+  let door = new THREE.Mesh(doorGeo, doorMesh)
+  door.position.set(PositionX, PositionY, PositionZ)
+  door.rotateY(Math.PI / Orientation)
+
+  // let doorHandleGeo = new THREE.SphereGeometry(5 * 2, 20 * 2, 6 * 2)
+  // let doorHandleMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/brassknob.jpg') })
+  // let doorHandle = new THREE.Mesh(doorHandleGeo, doorHandleMesh)
+  // doorHandle.position.set(40 * 2, 0, -14 * 2)
+  // door.add(doorHandle)
+
+  let doorFrameTopGeo = new THREE.BoxGeometry(100 * 2, 20 * 2, 30 * 2)
+  let doorFrameTopMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') })
+  let doorFrameTop = new THREE.Mesh(doorFrameTopGeo, doorFrameTopMesh)
+  door.add(doorFrameTop)
+  doorFrameTop.position.set(0, 125 * 2, 0)
+
+  let doorFrameSidesGeo = new THREE.BoxGeometry(20 * 2, 270 * 2, 30 * 2)
+  let doorFrameSidesMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') })
+  let doorFrameLeft = new THREE.Mesh(doorFrameSidesGeo, doorFrameSidesMesh)
+  let doorFrameRight = new THREE.Mesh(doorFrameSidesGeo, doorFrameSidesMesh)
+  door.add(doorFrameLeft)
+  door.add(doorFrameRight)
+  doorFrameRight.position.set(-60 * 2, 0, 0)
+  doorFrameLeft.position.set(60 * 2, 0, 0)
+
+  return door
+}
 
 
 // key

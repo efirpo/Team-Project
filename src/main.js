@@ -3,11 +3,13 @@ import "./Story.js";
 import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
-import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg"; import './images/woodtable1.jpg'
+import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg"; import './images/woodtable1.jpg'; import './images/brickswall1.jpg'; import './images/tileswall1.jpg'; import './images/bricksseamless.jpg'
 //wheelchair textures 
 import "./images/wheelchair/wheel.png"; import './images/wheelchair/tire.png'; import './images/wheelchair/leather.jpg'; import './images/wheelchair/back.jpeg'; import './images/wheelchair/steel1.jpeg';
 //surgery table textures
 import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg'
+// door textures
+import './images/doors/brassknob.jpg'; import './images/doors/metaldoor-fixed.jpg'; import './images/doors/door931-fixed.jpg'
 // key textures
 import './images/gold.jpg'
 
@@ -194,8 +196,8 @@ function setupScene() {
 	//Geometry: walls
 	var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
 	var materials = [
-		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/wallb.jpg") }),
-		new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
+		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/bricksseamless.jpg") }),
+		new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/bricksseamless.jpg') }),
 		new t.MeshLambertMaterial({ color: 0xFBEBCD }),
 
 	];
@@ -230,6 +232,9 @@ function setupScene() {
 
 	var toolsTable = new t.toolsTable(791, 4, -926, 2)
 	scene.add(toolsTable)
+
+	var door1 = new t.doorSimple(2458, 400, -1012, 1)
+	scene.add(door1)
 }
 
 function distance(x1, y1, x2, y2) {
