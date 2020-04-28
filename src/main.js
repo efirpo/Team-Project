@@ -213,6 +213,8 @@ function setupScene() {
 	scene.add(table);
 	table = new t.table(500, 250, 125, -1000);
 	scene.add(table);
+	var wheelchair = new t.wheelchair(1500, 100, 500, 3);
+	scene.add(wheelchair);
 
 
 }
