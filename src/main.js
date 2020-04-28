@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import "./Story.js";
-import {table} from "./Models.js";
+import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
-//import * as url from "./../images/tiledfloor.jpg";
+import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg";
 
 /**
  * Notes:
@@ -32,10 +32,10 @@ export var map =
 		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 15
 		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 16
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 17
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1], // 18
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1], // 19
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1], // 20
-		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 21
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 18
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 19
+		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1], // 20
+		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 2, 2, 1, 0, 0, 1], // 21
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
@@ -163,38 +163,38 @@ function setupScene() {
 	// Geometry: floor
 	var floor = new t.Mesh(
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
-		new t.MeshBasicMaterial({ map: t.ImageUtils.loadTexture("./src/images/tiledfloor.jpg") }),
+		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
 	scene.add(floor);
 
 	// Geometry: ceiling
 	var ceiling = new t.Mesh(
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
-		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./images1/tiledfloor.jpg") }),
+		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
 	ceiling.position.y = 750;
 	scene.add(ceiling);
 
 
 	//Geometry: walls
-	// var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
-	// var materials = [
-	// 		new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
-	// 		new t.MeshLambertMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
-	// 		new t.MeshLambertMaterial({ color: 0xFBEBCD }),
-	// 	new t.MeshLambertMaterial({}),
-	// ];
-	// for (var i = 0; i < mapW; i++) {
-	// 	for (var j = 0, m = map[i].length; j < m; j++) {
-	// 		if (map[i][j]) {
-	// 			var wall = new t.Mesh(cube, materials[map[i][j] - 1]);
-	// 			wall.position.x = (i - units / 2) * UNITSIZE;
-	// 			wall.position.y = WALLHEIGHT / 2;
-	// 			wall.position.z = (j - units / 2) * UNITSIZE;
-	// 			scene.add(wall);
-	// 		}
-	// 	}
-	// }
+	var cube = new t.CubeGeometry(UNITSIZE, WALLHEIGHT, UNITSIZE);
+	var materials = [
+			new t.MeshLambertMaterial({/*color: 0x00CCAA,*/map: t.ImageUtils.loadTexture("./assets/images/wallb.jpg") }),
+			new t.MeshBasicMaterial({/*color: 0xC5EDA0,*/map: t.ImageUtils.loadTexture('./assets/images/wallb.jpg') }),
+			new t.MeshLambertMaterial({ color: 0xFBEBCD }),
+
+	];
+	for (var i = 0; i < mapW; i++) {
+		for (var j = 0, m = map[i].length; j < m; j++) {
+			if (map[i][j]) {
+				var wall = new t.Mesh(cube, materials[map[i][j] - 1]);
+				wall.position.x = (i - units / 2) * UNITSIZE;
+				wall.position.y = WALLHEIGHT / 2;
+				wall.position.z = (j - units / 2) * UNITSIZE;
+				scene.add(wall);
+			}
+		}
+	}
 
 	
 	var table = new t.table(400, 200, 1875, 250);
@@ -206,12 +206,12 @@ function setupScene() {
 	scene.add(table);
 
 	// Lighting
-	var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 	directionalLight.position.set(0, -1, 0);
 	scene.add(directionalLight);
 
-	var flashlight = new THREE.SpotLight(0xffffff, 20, 20, Math.PI / 2.5, 1, 1.5);
-	flashlight.position.set(cam.position);
+	var flashlight = new THREE.SpotLight(0xffffff, .5);
+	flashlight.position.set(1100, 650, 320);
 	flashlight.target = cam;
 	scene.add(flashlight);
 
