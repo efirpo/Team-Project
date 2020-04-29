@@ -76,7 +76,8 @@ var runAnim = true, mouse = { x: 0, y: 0 };
 
 $(document).ready(function () {
 	$('body').append('<div id="intro">I remember it like a distant dream.My short term memory serves me well,but my long-term memory is patchily bringing rememberances of a life out there.I was a student of biology. He told a grandiose story of the ultimate experiment. Young and naive I followed him to this place. Where I have been for an untold amount of time.</div>');
-	$('#intro').css({ width: WIDTH, height: HEIGHT }).one('click', function (e) {
+	$('#intro').css({height: HEIGHT}).one('click', function(e) {
+
 		e.preventDefault();
 		$(this).fadeOut();
 		init();
