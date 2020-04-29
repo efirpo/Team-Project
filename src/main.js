@@ -231,7 +231,7 @@ function render() {
 
 // Set up the objects in the world
 // var cc = 0;
-export var changeMovementSpeed = function (number) {
+export function changeMovementSpeed(number) {
 	MOVESPEED = number;
 }
 
@@ -244,7 +244,6 @@ export var addObjectDynamically = function (number) {
 	alert("yeet");
 
 }
-
 
 
 export function setupScene() {
