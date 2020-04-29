@@ -223,12 +223,6 @@ THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
   door.position.set(PositionX, PositionY, PositionZ)
   door.rotateY(Math.PI / Orientation)
 
-  // let doorHandleGeo = new THREE.SphereGeometry(5 * 2, 20 * 2, 6 * 2)
-  // let doorHandleMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/brassknob.jpg') })
-  // let doorHandle = new THREE.Mesh(doorHandleGeo, doorHandleMesh)
-  // doorHandle.position.set(40 * 2, 0, -14 * 2)
-  // door.add(doorHandle)
-
   let doorFrameTopGeo = new THREE.BoxBufferGeometry(100 * 2, 20 * 2, 30 * 2)
   let doorFrameTopMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') })
   let doorFrameTop = new THREE.Mesh(doorFrameTopGeo, doorFrameTopMesh)
@@ -279,18 +273,105 @@ THREE.key = function (PositionX, PositionY, PositionZ, Orientation) {
   return keyRing
 }
 
-THREE.wall = function (Xcoord1, Xcoord2, HEIGHT, Zcoord1, Zcoord2) {
-let xLength, zLength, xPosition, zPosition;
-xLength = Math.abs(Xcoord1 - Xcoord2);
-zLength = Math.abs(Zcoord1 - Zcoord2);
-xPosition = (Xcoord1 + Xcoord2) / 2;
-zPosition = (Zcoord1 + Zcoord2) / 2;
+// chair
 
-let wallsizing = new THREE.BoxGeometry(xLength, HEIGHT, zLength);
-let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wallb.jpg") });
-let wallpiece = new THREE.Mesh(wallsizing, wallskin);
-wallpiece.position.set(xPosition, HEIGHT/2, zPosition);
-console.log(wallpiece.position)
-return wallpiece;
+THREE.chair = function (PositionX, PositionY, PositionZ, Orientation) {
+  let chairGeo = new THREE.BoxBufferGeometry(76 * 1.9, 12 * 1.9, 76 * 1.9);
+  let chairMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/chairwood.jpg') });
+  let chair = new THREE.Mesh(chairGeo, chairMesh)
+  chair.position.set(PositionX, PositionY, PositionZ);
+  chair.rotateY(Math.PI / Orientation)
+
+  let chairLegGeo = new THREE.BoxBufferGeometry(12 * 1.9, 70 * 1.9, 12 * 1.9);
+  let chairLeg1 = new THREE.Mesh(chairLegGeo, chairMesh);
+  let chairLeg2 = new THREE.Mesh(chairLegGeo, chairMesh);
+  let chairLeg3 = new THREE.Mesh(chairLegGeo, chairMesh);
+  let chairLeg4 = new THREE.Mesh(chairLegGeo, chairMesh);
+  chair.add(chairLeg4);
+  chair.add(chairLeg3);
+  chair.add(chairLeg2);
+  chair.add(chairLeg1);
+  chairLeg2.position.set(-28 * 1.9, -35 * 1.9, 30 * 1.9);
+  chairLeg1.position.set(28 * 1.9, -35 * 1.9, 30 * 1.9);
+  chairLeg3.position.set(-30 * 1.9, -35 * 1.9, -28 * 1.9);
+  chairLeg4.position.set(30 * 1.9, -35 * 1.9, -28 * 1.9);
+
+  let chairBack1Geo = new THREE.BoxBufferGeometry(20 * 1.9, 80 * 1.9, 8 * 1.9);
+  let chairBack1 = new THREE.Mesh(chairBack1Geo, chairMesh);
+  chair.add(chairBack1);
+  chairBack1.position.set(0, 45 * 1.9, 33 * 1.9)
+  let chairBack2Geo = new THREE.BoxBufferGeometry(12 * 1.9, 80 * 1.9, 8 * 1.9);
+  let chairBack2 = new THREE.Mesh(chairBack2Geo, chairMesh);
+  chair.add(chairBack2);
+  chairBack2.position.set(34 * 1.9, 45 * 1.8, 33 * 1.9)
+  chairBack2.rotateZ(Math.PI / 1.02)
+  let chairBack3 = new THREE.Mesh(chairBack2Geo, chairMesh)
+  chair.add(chairBack3)
+  chairBack3.position.set(-34 * 1.9, 45 * 1.9, 33 * 1.9)
+  chairBack3.rotateZ(Math.PI / -1.02)
+
+  let chairBackTopGeo = new THREE.BoxBufferGeometry(84 * 1.9, 30 * 1.9, 14 * 1.9)
+  let chairBackTop = new THREE.Mesh(chairBackTopGeo, chairMesh)
+  chair.add(chairBackTop);
+  chairBackTop.position.set(0, 80 * 1.9, 33 * 1.9)
+
+  return chair
+}
+
+// bed
+
+THREE.bed = function (PositionX, PositionY, PositionZ, Orientation) {
+
+
+  let mattressGeo = new THREE.BoxBufferGeometry(240 * 2.5, 36 * 2.5, 120 * 2.5);
+  let mattressMaterial = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/dirty-cloth.jpg') });
+  let mattress = new THREE.Mesh(mattressGeo, mattressMaterial);
+  mattress.position.set(PositionX, PositionY, PositionZ);
+  mattress.rotateY(Orientation);
+
+  let bedframeGeo = new THREE.BoxBufferGeometry(252 * 2.5, 9 * 2.5, 132 * 2.5);
+  let bedframeMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg') });
+  let bedframe = new THREE.Mesh(bedframeGeo, bedframeMesh);
+  mattress.add(bedframe);
+  bedframe.position.set(0, -20 * 2.5, 0)
+
+  let bedLegGeo = new THREE.CylinderGeometry(9 * 2.5, 9 * 2.5, 30 * 2.5);
+  let bedLegMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg') });
+  let bedLeg1 = new THREE.Mesh(bedLegGeo, bedLegMesh);
+  let bedLeg2 = new THREE.Mesh(bedLegGeo, bedLegMesh);
+  let bedLeg3 = new THREE.Mesh(bedLegGeo, bedLegMesh);
+  let bedLeg4 = new THREE.Mesh(bedLegGeo, bedLegMesh);
+  mattress.add(bedLeg1);
+  mattress.add(bedLeg2);
+  mattress.add(bedLeg3);
+  mattress.add(bedLeg4);
+  bedLeg1.position.set(120 * 2.5, -30 * 2.5, 60 * 2.5);
+  bedLeg2.position.set(120 * 2.5, -30 * 2.5, -60 * 2.5);
+  bedLeg3.position.set(-120 * 2.5, -30 * 2.5, 60 * 2.5);
+  bedLeg4.position.set(-120 * 2.5, -30 * 2.5, -60 * 2.5);
+
+  let headboardGeo = new THREE.BoxGeometry(15 * 2.5, 90 * 2.5, 132 * 2.5);
+  let headboardMesh = new THREE.MeshLambertMaterial({ color: 0xfa35cd });
+  let headboard = new THREE.Mesh(headboardGeo, headboardMesh)
+  mattress.add(headboard);
+  headboard.position.set(-122 * 2.5, 30 * 2.5, 0)
+
+  return mattress
+
+}
+
+THREE.wall = function (Xcoord1, Xcoord2, HEIGHT, Zcoord1, Zcoord2) {
+  let xLength, zLength, xPosition, zPosition;
+  xLength = Math.abs(Xcoord1 - Xcoord2);
+  zLength = Math.abs(Zcoord1 - Zcoord2);
+  xPosition = (Xcoord1 + Xcoord2) / 2;
+  zPosition = (Zcoord1 + Zcoord2) / 2;
+
+  let wallsizing = new THREE.BoxGeometry(xLength, HEIGHT, zLength);
+  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wallb.jpg") });
+  let wallpiece = new THREE.Mesh(wallsizing, wallskin);
+  wallpiece.position.set(xPosition, HEIGHT / 2, zPosition);
+  console.log(wallpiece.position)
+  return wallpiece;
 
 }
