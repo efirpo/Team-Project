@@ -1,5 +1,5 @@
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
-import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3";
+import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
 
 import $ from 'jquery';
 import * as THREE from 'three';
@@ -15,6 +15,10 @@ let someFlag3 = false;
 let someFlag4 = false;
 let someFlag5 = false;
 let keyFlag = false;
+let someFlag6 = false;
+let someFlag7 = false;
+
+let storyPoints = [0, 0, 0, 0, 0, 0];
 
 export function soundChange(cam) {
 
@@ -41,7 +45,6 @@ export function soundChange(cam) {
       sound.play();
     });
   }
-
   var startTimer = function (duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -65,9 +68,31 @@ export function soundChange(cam) {
       addAudio('./assets/sounds/metalClick.ogg', .6, false);
       addAudio('./assets/sounds/add_item.mp3', .6, false);
       keyFlag = true;
+      storyPoints[2] = 1;
 
     } else {
       $("#credits p").text("Key Obtained");
+    }
+  }
+
+  if (cam.position.x > 2250 && cam.position.x < 2750 && cam.position.z > 900 && cam.position.z < 1250) {
+    if (keyFlag === true) {
+      if (someFlag6 === false) {
+        someFlag6 = true;
+        addAudio("./assets/sounds/door_open.mp3", .4, false);
+        addAudio("./assets/sounds/intro_song.mp3", .5, true);
+      } else {
+        $("#credits p").text("You Escaped");
+      }
+    } else {
+      if (someFlag7 === false) {
+        someFlag7 = true;
+        addAudio("./assets/sounds/door_attempt.mp3", .4, false);
+        addAudio("./assets/sounds/scary_flashback.mp3", .4, false);
+        addAudio("./assets/sounds/panic_heartbeat.mp3", .5, false);
+      } else {
+        $("#credits p").text("You need a key!");
+      }
     }
   }
 
@@ -110,15 +135,16 @@ export function soundChange(cam) {
       someFlag2 = true;
 
       addAudio('./assets/sounds/intro_song.mp3', .3, false);
+
     }
   }
 
   if (cam.position.x > -1495 && cam.position.x < -1006 && cam.position.z > -648 && cam.position.z < 492) {
     if (someFlag4 === false) {
       someFlag4 = true;
+      storyPoints[0] = 1;
       addAudio('./assets/sounds/panic_heartbeat.mp3', .4, false);
     }
   }
-
-  return someFlag4;
+  return storyPoints;
 }

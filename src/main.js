@@ -185,8 +185,9 @@ function animate() {
 	render();
 }
 
-
 let wheelChairFlag = false;
+let keyFlag = false;
+
 // Update and display
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
@@ -196,11 +197,17 @@ function render() {
 	scene.children[1].position.z = cam.position.z;
 
 	let whenChange = soundChange(cam);
-	if (whenChange && !wheelChairFlag) {
+	if (whenChange[0] === 1 && !wheelChairFlag) {
 		wheelChairFlag = true;
 		var wheelChair2 = new t.wheelChair(-1240, 150, 190, 2);
 		scene.add(wheelChair2);
 	}
+	if (whenChange[2] == 1 && !keyFlag) {
+		keyFlag = true;
+		let key2Remove = scene.getObjectByName('key2');
+		scene.remove(key2Remove);
+	}
+
 	// if (cam.position.x > 2000) {
 	// 	scene.__lights[0].intensity = 0;
 	// 	scene.__lights[1].intensity = 0;
@@ -281,7 +288,13 @@ export function setupScene() {
 	var wheelChair = new t.wheelChair(250, 150, -1000, 2);
 	scene.add(wheelChair);
 
+	var keyTable = new t.table(200, 175, 2625, -1650);
+	scene.add(keyTable);
 
+	var key = new t.key(2625, 190, -1650, 1);
+	key.name = 'key2';
+	key.rotateX(Math.PI / 2);
+	scene.add(key);
 
 	//Geometry: walls
 	let myWalls = [[2245, 2000, 750, -750, -125], [2245, 2000, 750, 500, 1255], [2245, 2000, 750, -125, 500], [1750, 1000, 750, 750, 500], [1000, 250, 750, 750, 500],
