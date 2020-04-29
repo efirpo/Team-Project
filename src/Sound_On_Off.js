@@ -45,6 +45,7 @@ export function soundChange(cam) {
       sound.play();
     });
   }
+
   var startTimer = function (duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
