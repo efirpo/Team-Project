@@ -62,7 +62,7 @@ var WIDTH = window.innerWidth,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
 	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 700,
+	MOVESPEED = 400,
 	LOOKSPEED = 0.075
 
 
@@ -231,6 +231,9 @@ function render() {
 
 // Set up the objects in the world
 // var cc = 0;
+export var changeMovementSpeed = function (number) {
+	MOVESPEED = number;
+}
 
 export var addObjectDynamically = function (number) {
 	alert(number);

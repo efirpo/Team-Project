@@ -6,18 +6,29 @@ import t from './main.js';
 import scene from './main.js';
 import setupScene from './main.js';
 import addObjectDynamically from "./main.js";
+import changeMovementSpeed from "./main.js";
+
 
 let someFlag = false;
 let someFlag2 = false;
 let someFlag3 = false;
 let someFlag4 = false;
+let someFlag5 = false;
 
 
 
 export function soundChange(cam) {
 
-  if (cam.position.z > 700 && someFlag3 === false) {
+  let displayFunction = function (str) {
+    setInterval(() => {
 
+      $("#credits p").text(str);
+
+    }, 5000);
+  }
+
+
+  if (cam.position.z > 700 && someFlag3 === false) {
 
     someFlag3 = true;
 
@@ -34,6 +45,34 @@ export function soundChange(cam) {
       sound.play();
 
     });
+  } else if (cam.position.z > 700 && cam.position.x > 260) {
+
+    $("#credits p").text("--i need to get out of here--");
+
+  }
+
+  if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300 && someFlag5 === false) {
+
+    someFlag5 = true;
+
+    listener = new THREE.AudioListener();
+    audioLoader = new THREE.AudioLoader();
+    cam.add(listener);
+
+    sound = new THREE.Audio(listener);
+
+    audioLoader.load('./assets/sounds/panic_heartbeat.mp3', function (buffer) {
+      sound.setBuffer(buffer);
+      sound.setLoop(false);
+      sound.setVolume(0.2);
+      sound.play();
+
+    });
+    changeMovementSpeed(700);
+  } else if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300) {
+
+    $("#credits p").text("LEAVE NOW!");
+
   }
 
   if (cam.position.x > -225 && cam.position.x < 225 && cam.position.z < 1250 && cam.position.z > 750) {
@@ -103,9 +142,6 @@ export function soundChange(cam) {
         sound.play();
 
       });
-
-      // addObjectDynamically(2);
-
 
     }
   }
