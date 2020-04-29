@@ -1,5 +1,6 @@
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
-import "./sounds/scary_flashback.mp3";
+import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3";
+
 import $ from 'jquery';
 import * as THREE from 'three';
 import t from './main.js';
@@ -61,7 +62,8 @@ export function soundChange(cam) {
   if (cam.position.x > 2504 && cam.position.x < 2750 && cam.position.z > -1800 && cam.position.z < -1500) {
     if (keyFlag === false) {
 
-      addAudio('./assets/sounds/add_item.mp3', .8, false);
+      addAudio('./assets/sounds/metalClick.ogg', .6, false);
+      addAudio('./assets/sounds/add_item.mp3', .6, false);
       keyFlag = true;
 
     } else {
