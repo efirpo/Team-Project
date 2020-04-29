@@ -371,7 +371,7 @@ THREE.bed = function (PositionX, PositionY, PositionZ, Orientation) {
   bedLeg4.position.set(-120 * 2.5, -30 * 2.5, -60 * 2.5);
 
   let headboardGeo = new THREE.BoxGeometry(15 * 2.5, 90 * 2.5, 132 * 2.5);
-  let headboardMesh = new THREE.MeshLambertMaterial({ color: 0xfa35cd });
+  let headboardMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg')});
   let headboard = new THREE.Mesh(headboardGeo, headboardMesh);
   mattress.add(headboard);
   headboard.position.set(-122 * 2.5, 30 * 2.5, 0)
@@ -388,7 +388,7 @@ THREE.wall = function (Xcoord1, Xcoord2, HEIGHT, Zcoord1, Zcoord2) {
   zPosition = (Zcoord1 + Zcoord2) / 2;
 
   let wallsizing = new THREE.BoxGeometry(xLength, HEIGHT, zLength);
-  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wallb.jpg") });
+  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/bricksseamless.jpg") });
   let wallpiece = new THREE.Mesh(wallsizing, wallskin);
 
   wallpiece.position.set(xPosition, HEIGHT/2, zPosition);

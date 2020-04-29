@@ -286,15 +286,16 @@ export function setupScene() {
 	flashlight.target = cam;
 	scene.add(flashlight);
 
-	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
-	directionalLight.position.set(0, 1, 0);
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	directionalLight.position.set(0, 1, 2);
 	scene.add(directionalLight);
 
-	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
+	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2],[2600,250, 870, 1]];
 	for (let i = 0; i < ourDoors.length; i++) {
 		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
 		scene.add(door[0]);
 		scene.add(door[1]);
+
 	}
 
 
@@ -315,8 +316,7 @@ export function setupScene() {
 	ceiling.position.y = 750;
 	scene.add(ceiling);
 
-	var wheelChair = new t.wheelChair(250, 150, -1000, 2);
-	scene.add(wheelChair);
+	
 
 	var keyTable = new t.table(200, 175, 2625, -1650);
 	scene.add(keyTable);
@@ -346,6 +346,18 @@ export function setupScene() {
 		var aWall = new t.wall(myWalls[i][0], myWalls[i][1], myWalls[i][2], myWalls[i][3], myWalls[i][4]);
 		scene.add(aWall);
 	}
+	let mattress = new t.bed(1265, 100, 120, 1.5);
+	scene.add(mattress);
+	let base = new t.surgeryTable(397, 50, -1100, -7);
+	scene.add(base);
+
+	let toolsTable = new t.toolsTable(294, 0, -1446, 2);
+	scene.add(toolsTable);
+
+	var wheelChair = new t.wheelChair(564, 150, -450, -2);
+	scene.add(wheelChair);
+	let chair = new t.chair(-2402, 145, -1737, -3);
+	scene.add(chair);
 
 
 }

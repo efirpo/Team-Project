@@ -4,7 +4,7 @@ import $ from 'jquery';
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
 import "./images/outside.png";
-import "./images/disturbed.jpeg";
+import "./images/disturbed.jpg";
 import * as THREE from 'three';
 import t from './main.js';
 import scene from './main.js';
@@ -24,8 +24,10 @@ let someFlag5 = false;
 let keyFlag = false;
 let someFlag6 = false;
 let someFlag7 = false;
+let someFlag8 = false;
 let firstDoorOpened = false;
 let secondDoorOpened = false;
+let thirdDoorOpened = false;
 
 
 let storyPoints = [0, 0, 0, 0, 0, 0];
@@ -78,6 +80,17 @@ export function checkStoryTriggers(cam, scene) {
       $("#intro").fadeIn();
       room = true;
     }
+    
+  }
+  if ((cam.position.x > -1500 && cam.position.x < -1000) && (cam.position.z > -2250 && cam.position.z < -2000)) {
+    if (scene.children[11].rotation.y < 3.2) {
+      scene.children[11].rotation.y += .04;
+    }
+    if (!thirdDoorOpened) {
+      addAudio('./assets/sounds/door_open.mp3', .6, false);
+      thirdDoorOpened = true;
+    }
+
   }
 }
 
@@ -138,12 +151,6 @@ export function soundChange(cam) {
     }
   }
 
-  //animate T door
-  if ((cam.position.x > -1500 && cam.position.x < -1000) && (cam.position.z > -2250 && cam.position.z < -2000)) {
-
-  }
-
-
   if (cam.position.x > 2250 && cam.position.x < 2750 && cam.position.z > 900 && cam.position.z < 1250) {
     if (keyFlag === true) {
       if (someFlag6 === false) {
@@ -184,16 +191,25 @@ export function soundChange(cam) {
     changeMovementSpeed(700);
 
   } else if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300) {
-
-    $("#intro").css("background-image", "url(./assets/images/disturbed.jpeg)");
+    if (!someFlag8) {
+    $("#intro").css("background-image", "url(./assets/images/disturbed.jpg)");
     $("#intro").css("background-repeat", "no-repeat");
     $("#intro").css("background-size", "cover");
     $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
 
-    $("#intro").html(`I can hazily recall the last experiment. As I mopped up the blood and viscera from the stone floor, 
-    the patient woke suddenly. In a rage, he knocked my master to the ground with a loud crack as skull met tile, then fainted. In a panic I ran to my room. 
+    $("#intro").html(`I can hazily recall the last experiment.<br><br> As I mopped up the blood and viscera from the stone floor, 
+    the patient woke suddenly.<br><br> In a rage, he knocked my master to the ground with a loud crack as skull met tile, then fainted.<br><br>In a panic I ran to my room.<br><br> 
     I cannot face my master having abandoned him, having seen him weak.`);
     $("#intro").fadeIn();
+    someFlag8 = true;
+    }
+  }
+    $("#intro").html(`I can hazily recall the last experiment.<br><br> As I mopped up the blood and viscera from the stone floor, 
+    the patient woke suddenly.<br><br> In a rage, he knocked my master to the ground with a loud crack as skull met tile, then fainted.<br><br>In a panic I ran to my room.<br><br> 
+    I cannot face my master having abandoned him, having seen him weak.`);
+    $("#intro").fadeIn();
+    someFlag8 = true;
+    }
   }
 
   if (cam.position.x > -225 && cam.position.x < 225 && cam.position.z < 1250 && cam.position.z > 750) {
