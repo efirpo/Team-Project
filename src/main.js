@@ -282,10 +282,12 @@ function setupScene() {
 		scene.add(aWall);
 	}
 
-	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
-	for (let i = 0; i < ourDoors.length; i++) {
-		let aDoor = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
-		scene.add(aDoor);
+
+	let ourDoors = [[1875, 250, 550, 1],[125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
+	for (let i = 0; i < ourDoors.length; i++){
+		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
+		scene.add(door[0]);
+		scene.add(door[1]);
 	}
 
 }
