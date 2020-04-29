@@ -59,6 +59,20 @@ var WIDTH = window.innerWidth,
 var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin, listener;
 var runAnim = true, mouse = { x: 0, y: 0 };
 
+$(document).ready(function() {
+	$('body').append('<div id="intro">I remember it like a distant dream.My short term memory serves me well,but my long-term memory is patchily bringing rememberances of a life out there.I was a student of biology. He told a grandiose story of the ultimate experiment. Young and naive I followed him to this place. Where I have been for an untold amount of time.</div>');
+	$('#intro').css({width: WIDTH, height: HEIGHT}).one('click', function(e) {
+		e.preventDefault();
+		$(this).fadeOut();
+		init();
+		setInterval(drawRadar, 1000);
+		animate();
+	});
+
+	
+});
+
+
 // Setup
 function init() {
 	clock = new t.Clock(); // Used in render() for controls.update()
@@ -128,8 +142,8 @@ function init() {
 	});
 
 	// Display HUD
-	$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
-	$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
+	// $('body').append('<canvas id="radar" width="200" height="200"></canvas>');
+	// $('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
 	$('body').append('<div id="credits"><p>Created by <a href="http://www.isaacsukin.com/">Isaac Sukin</a> using <a href="http://mrdoob.github.com/three.js/">Three.js</a><br />WASD to move, mouse to look, click to shoot</p></div>');
 
 	// Set up "hurt" flash
