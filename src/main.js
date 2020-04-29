@@ -277,6 +277,7 @@ function setupScene() {
 		var aWall = new t.wall(myWalls[i][0], myWalls[i][1], myWalls[i][2], myWalls[i][3], myWalls[i][4]);
 		scene.add(aWall);
 }
+}
 
 function distance(x1, y1, x2, y2) {
 	return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
@@ -376,5 +377,3 @@ $(document).ready(function () {
 	animate();
 
 });
-
-
