@@ -153,8 +153,8 @@ function init() {
 	});
 
 	// Display HUD
-	// $('body').append('<canvas id="radar" width="200" height="200"></canvas>');
-	// $('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
+	$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
+	$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
 	$('body').append('<div id="credits"><p>Created by <a href="http://www.isaacsukin.com/">Isaac Sukin</a> using <a href="http://mrdoob.github.com/three.js/">Three.js</a><br />WASD to move, mouse to look, click to shoot</p></div>');
 
 	// Set up "hurt" flash
