@@ -66,12 +66,12 @@ var WIDTH = window.innerWidth,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
 	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 700,
+	MOVESPEED = 400,
 	LOOKSPEED = 0.075
 
 
 // Global vars
-var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin, listener;
+export var t = THREE, scene, cam, renderer, controls, clock, projector, model, skin, listener;
 var runAnim = true, mouse = { x: 0, y: 0 };
 
 $(document).ready(function () {
@@ -189,6 +189,9 @@ function animate() {
 	render();
 }
 
+let wheelChairFlag = false;
+let keyFlag = false;
+
 // Update and display
 function render() {
 	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
@@ -197,8 +200,17 @@ function render() {
 	scene.children[1].position.x = cam.position.x;
 	scene.children[1].position.z = cam.position.z;
 
-
-
+	let whenChange = soundChange(cam);
+	if (whenChange[0] === 1 && !wheelChairFlag) {
+		wheelChairFlag = true;
+		var wheelChair2 = new t.wheelChair(-1240, 150, 190, 2);
+		scene.add(wheelChair2);
+	}
+	if (whenChange[2] == 1 && !keyFlag) {
+		keyFlag = true;
+		let key2Remove = scene.getObjectByName('key2');
+		scene.remove(key2Remove);
+	}
 
 	// if (cam.position.x > 2000) {
 	// 	scene.__lights[0].intensity = 0;
@@ -229,7 +241,24 @@ function render() {
 }
 
 // Set up the objects in the world
-function setupScene() {
+// var cc = 0;
+export function changeMovementSpeed(number) {
+	MOVESPEED = number;
+}
+
+export var addObjectDynamically = function (number) {
+	alert(number);
+	if (number === 2) {
+		var wheelChair2 = new t.wheelChair(-1240, 150, 190, 2);
+		scene.add(wheelChair2);
+	}
+	alert("yeet");
+
+}
+
+
+export function setupScene() {
+
 	var UNITSIZE = 250, units = mapW;
 
 	// Lighting
@@ -260,6 +289,16 @@ function setupScene() {
 	ceiling.position.y = 750;
 	scene.add(ceiling);
 
+	var wheelChair = new t.wheelChair(250, 150, -1000, 2);
+	scene.add(wheelChair);
+
+	var keyTable = new t.table(200, 175, 2625, -1650);
+	scene.add(keyTable);
+
+	var key = new t.key(2625, 190, -1650, 1);
+	key.name = 'key2';
+	key.rotateX(Math.PI / 2);
+	scene.add(key);
 
 	//Geometry: walls
 	let myWalls = [[2245, 2000, 750, -750, -125], [2245, 2000, 750, 500, 1255], [2245, 2000, 750, -125, 500], [1750, 1000, 750, 750, 500], [1000, 250, 750, 750, 500],
@@ -281,7 +320,6 @@ function setupScene() {
 		var aWall = new t.wall(myWalls[i][0], myWalls[i][1], myWalls[i][2], myWalls[i][3], myWalls[i][4]);
 		scene.add(aWall);
 	}
-
 
 	let ourDoors = [[1875, 250, 550, 1],[125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
 	for (let i = 0; i < ourDoors.length; i++){
