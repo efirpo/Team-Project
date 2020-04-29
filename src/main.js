@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { checkStoryTriggers } from "./Story.js";
-import { soundChange } from "./Sound_On_Off.js";
-import { soundOn } from "./Sound_On_Off.js";
+import { soundChange } from "./Story.js";
 import "./Models.js";
 import "./Three.FirstPersonControls";
 import $ from "jquery";
@@ -66,7 +65,7 @@ var WIDTH = window.innerWidth,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
 	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 400,
+	MOVESPEED = 1000,
 	LOOKSPEED = 0.075
 
 
@@ -75,14 +74,33 @@ export var t = THREE, scene, cam, renderer, controls, clock, projector, model, s
 var runAnim = true, mouse = { x: 0, y: 0 };
 
 $(document).ready(function () {
-	$('body').append('<div id="intro">I remember it like a distant dream.My short term memory serves me well,but my long-term memory is patchily bringing rememberances of a life out there.I was a student of biology. He told a grandiose story of the ultimate experiment. Young and naive I followed him to this place. Where I have been for an untold amount of time.</div>');
-	$('#intro').css({height: HEIGHT}).one('click', function(e) {
+	var gameStarted = false;
+
+	$('body').append(`<div id="intro">How long has it been?<br> 
+<br>
+	I haven't had an injection since God knows when. <br>
+	<br>
+	I long for the purpose that I felt under master's loving care, and now that purpose has given way to a sense of dread.<br>
+	<br>
+	I am lost. <br>
+	<br>
+	Doubt crawls through my veins where once was warmth. <br>
+	<br>
+	How long have I been within these walls...</div>`);
+	
+	$("#intro").css("background-image", "linear-gradient( #777d78, #474d48, #000000)");
+
+	$('#intro').css({ height: HEIGHT }).on('click', function (e) {
 
 		e.preventDefault();
 		$(this).fadeOut();
-		init();
-		setInterval(drawRadar, 1000);
-		animate();
+		if (!gameStarted) {
+			init();
+			setInterval(drawRadar, 1000);
+			animate();
+			gameStarted = true;
+		}
+
 	});
 
 
@@ -227,19 +245,19 @@ function render() {
 
 
 	renderer.render(scene, cam); // Repaint
-
-	// Death
-	// if (health <= 0) {
-	// 	runAnim = false;
-	// 	$(renderer.domElement).fadeOut();
-	// 	$('#radar, #hud, #credits').fadeOut();
-	// 	$('#intro').fadeIn();
-	// 	$('#intro').html('Ouch! Click to restart...');
-	// 	$('#intro').one('click', function () {
-	// 		location = location;
-	// 	});
-	// }
 }
+// Death
+// 	if (health <= 0) {
+// 		runAnim = false;
+// 		$(renderer.domElement).fadeOut();
+// 		$('#radar, #hud, #credits').fadeOut();
+// 		$('#intro').fadeIn();
+// 		$('#intro').html('you reached the exit');
+// 		$('#intro').one('click', function () {
+// 			location = location;
+// 		});
+// 	}
+// }
 
 // Set up the objects in the world
 // var cc = 0;
@@ -272,8 +290,8 @@ export function setupScene() {
 	directionalLight.position.set(0, 1, 0);
 	scene.add(directionalLight);
 
-	let ourDoors = [[1875, 250, 550, 1],[125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
-	for (let i = 0; i < ourDoors.length; i++){
+	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
+	for (let i = 0; i < ourDoors.length; i++) {
 		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
 		scene.add(door[0]);
 		scene.add(door[1]);
