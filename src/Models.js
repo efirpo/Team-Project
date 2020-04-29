@@ -86,12 +86,6 @@ THREE.wheelChair = function (PositionX, PositionY, PositionZ, Orientation) {
   return chairSeat;
 }
 
-//wall
-THREE.wall = function (Xcoord1, Xcoord2, Zcoord1, Zcoord2, HEIGHT) {
-  let wallpiece = new THREE.BoxBufferGeometry((Math.abs(Xcoord2) - Math.abs(Xcoord1)), HEIGHT, (Math.abs(Zcoord2) - Math.abs(Zcoord1)));
-  wallpiece.position.set((Xcoord2 - Xcoord1) / 2, HEIGHT / 2, (Zcoord2 - Zcoord1) / 2);
-  return wallpiece;
-}
 // surgery table
 THREE.surgeryTable = function (PositionX, PositionY, PositionZ, Orientation) {
 
@@ -283,4 +277,20 @@ THREE.key = function (PositionX, PositionY, PositionZ, Orientation) {
   keyRing.add(keyTooth2);
 
   return keyRing
+}
+
+THREE.wall = function (Xcoord1, Xcoord2, HEIGHT, Zcoord1, Zcoord2) {
+let xLength, zLength, xPosition, zPosition;
+xLength = Math.abs(Xcoord1 - Xcoord2);
+zLength = Math.abs(Zcoord1 - Zcoord2);
+xPosition = (Xcoord1 + Xcoord2) / 2;
+zPosition = (Zcoord1 + Zcoord2) / 2;
+
+let wallsizing = new THREE.BoxGeometry(xLength, HEIGHT, zLength);
+let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wallb.jpg") });
+let wallpiece = new THREE.Mesh(wallsizing, wallskin);
+wallpiece.position.set(xPosition, HEIGHT/2, zPosition);
+console.log(wallpiece.position)
+return wallpiece;
+
 }
