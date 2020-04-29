@@ -153,8 +153,8 @@ function init() {
 	});
 
 	// Display HUD
-	// $('body').append('<canvas id="radar" width="200" height="200"></canvas>');
-	// $('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
+	$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
+	$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
 	$('body').append('<div id="credits"><p>Created by <a href="http://www.isaacsukin.com/">Isaac Sukin</a> using <a href="http://mrdoob.github.com/three.js/">Three.js</a><br />WASD to move, mouse to look, click to shoot</p></div>');
 
 	// Set up "hurt" flash
@@ -367,6 +367,7 @@ function getRandBetween(lo, hi) {
 	return parseInt(Math.floor(Math.random() * (hi - lo + 1)) + lo, 10);
 }
 
+<<<<<<< HEAD
 $(document).ready(function () {
 	// $('body').append('<div id="intro">Click to start</div>');
 	// $('#intro').css({ width: WIDTH, height: HEIGHT }).one('click', function (e) {
@@ -377,3 +378,5 @@ $(document).ready(function () {
 	animate();
 
 });
+=======
+>>>>>>> f8dd46dbed697be27aa61e26af019caf4ceabfcb
