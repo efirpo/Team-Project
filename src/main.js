@@ -8,6 +8,16 @@ import $ from "jquery";
 import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/wallb.jpg";
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import { CameraHelper } from 'three';
+// new table texture, new wall texture
+import './images/woodtable1.jpg'; import './images/bricksseamless.jpg'
+//wheelchair textures 
+import "./images/wheelchair/wheel.png"; import './images/wheelchair/tire.png'; import './images/wheelchair/leather.jpg'; import './images/wheelchair/back.jpeg'; import './images/wheelchair/steel1.jpeg';
+//surgery table textures
+import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg'
+// door textures
+import './images/doors/brassknob.jpg'; import './images/doors/metaldoor-fixed.jpg'; import './images/doors/door931-fixed.jpg'
+// key textures
+import './images/gold.jpg'
 
 /**
  * Notes:
