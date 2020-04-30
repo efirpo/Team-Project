@@ -45,7 +45,7 @@ var addAudio = function (soundString, vol, loop) {
     sound.setVolume(vol);
     sound.play();
   });
-}
+};
 
 export function checkStoryTriggers(cam, scene) {
   if ((cam.position.x > 1800 && cam.position.x < 2000) && (cam.position.z > 250 && cam.position.z < 500) && (scene.children[3].rotation.y >= -1.8)) {
@@ -98,16 +98,16 @@ export function checkStoryTriggers(cam, scene) {
         scene.children[13].rotation.y += .04;
       }
       else {
-      $("#credits p").text("You Escaped");
-      escaped = true;
+        $("#credits p").text("You Escaped");
+        escaped = true;
 
-      $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
-      $("#intro").css("background-repeat", "no-repeat");
-      $("#intro").css("background-size", "cover");
-      $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
+        $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
+        $("#intro").css("background-repeat", "no-repeat");
+        $("#intro").css("background-size", "cover");
+        $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
 
-      $("#intro").html(`Trees...<br><br> Green...<br><br>I'd almost forgotten...`);
-      $("#intro").fadeIn();
+        $("#intro").html(`Trees...<br><br> Green...<br><br>I'd almost forgotten...`);
+        $("#intro").fadeIn();
       }
     }
   }
@@ -124,10 +124,6 @@ function gameOver() {
 }
 
 
-
-
-
-
 export function soundChange(cam) {
 
   let displayFunction = function (str) {
@@ -136,7 +132,7 @@ export function soundChange(cam) {
       $("#credits p").text(str);
 
     }, 5000);
-  }
+  };
 
   //add audio using the name of file
 
@@ -155,7 +151,7 @@ export function soundChange(cam) {
         timer = duration;
       }
     }, 1000);
-  }
+  };
 
   if (cam.position.x > 2504 && cam.position.x < 2750 && cam.position.z > -1800 && cam.position.z < -1500) {
     if (keyFlag === false) {
@@ -178,11 +174,10 @@ export function soundChange(cam) {
         someFlag6 = true;
         addAudio("./assets/sounds/door_open.mp3", .4, false);
         addAudio("./assets/sounds/intro_song.mp3", .5, true);
-      } 
+      }
       else {
-      $("#credits p").text("You Escaped");
-      escaped = true;
-        //****** */
+        $("#credits p").text("You Escaped");
+        escaped = true;
       }
     } else {
       if (someFlag7 === false) {
@@ -211,16 +206,16 @@ export function soundChange(cam) {
 
   } else if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300) {
     if (!someFlag8) {
-    $("#intro").css("background-image", "url(./assets/images/disturbed.jpg)");
-    $("#intro").css("background-repeat", "no-repeat");
-    $("#intro").css("background-size", "cover");
-    $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
+      $("#intro").css("background-image", "url(./assets/images/disturbed.jpg)");
+      $("#intro").css("background-repeat", "no-repeat");
+      $("#intro").css("background-size", "cover");
+      $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
 
-    $("#intro").html(`I can hazily recall the last experiment.<br><br> As I mopped up the blood and viscera from the stone floor, 
-    the patient woke suddenly.<br><br> In a rage, he knocked my master to the ground with a loud crack as skull met tile, then fainted.<br><br>In a panic I ran to my room.<br><br> 
-    I cannot face my master having abandoned him, having seen him weak.`);
-    $("#intro").fadeIn();
-    someFlag8 = true;
+      $("#intro").html(`I can hazily recall the last experiment.<br><br> As I mopped up the blood and viscera from the stone floor, 
+      the patient woke suddenly.<br><br> In a rage, he knocked my master to the ground with a loud crack as skull met tile, then fainted.<br><br>In a panic I ran to my room.<br><br> 
+      I cannot face my master having abandoned him, having seen him weak.`);
+      $("#intro").fadeIn();
+      someFlag8 = true;
     }
   }
 

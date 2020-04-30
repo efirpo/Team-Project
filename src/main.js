@@ -8,21 +8,21 @@ import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import { CameraHelper } from 'three';
 // new table texture, new wall texture
-import './images/woodtable1.jpg'; import './images/bricksseamless.jpg'
+import './images/woodtable1.jpg'; import './images/bricksseamless.jpg';
 //wheelchair textures 
 import "./images/wheelchair/wheel.png"; import './images/wheelchair/tire.png'; import './images/wheelchair/leather.jpg'; import './images/wheelchair/back.jpeg'; import './images/wheelchair/steel1.jpeg';
 //surgery table textures
-import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg'
+import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg';
 // door textures
-import './images/doors/brassknob.jpg'; import './images/doors/metaldoor-fixed.jpg'; import './images/doors/door931-fixed.jpg'
+import './images/doors/brassknob.jpg'; import './images/doors/metaldoor-fixed.jpg'; import './images/doors/door931-fixed.jpg';
 // key textures
-import './images/gold.jpg'
+import './images/gold.jpg';
 //bed textures
-import './images/dirty-cloth.jpg'
+import './images/dirty-cloth.jpg';
 //chair textures
-import './images/chairwood.jpg'
-import './images/escape_texture.jpg'
-import './images/doorbricks.jpg'
+import './images/chairwood.jpg';
+import './images/escape_texture.jpg';
+import './images/doorbricks.jpg';
 
 
 /**
@@ -34,41 +34,40 @@ import './images/doorbricks.jpg'
 
 export var map =
 	[ // 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19
-		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 0
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 1
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 2
-		[1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1], // 3
-		[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 4
-		[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 5
-		[1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 6
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 7
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 8
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 9
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 10
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 11
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 12
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1], // 13
-		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 14
-		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 15
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 16
-		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 17
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 18
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 19
-		[1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1], // 20
-		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 21
-		[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
-		[1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
-		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
-	], mapW = map.length;
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 0
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 1
+[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 2
+[1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1], // 3
+[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 4
+[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 5
+[1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 6
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 7
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 8
+[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 9
+[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 10
+[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 11
+[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 12
+[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1], // 13
+[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 14
+[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 15
+[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 16
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 17
+[1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 18
+[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1], // 19
+[1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1], // 20
+[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 21
+[1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 22
+[1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 23
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 24
+], mapW = map.length;
 
 // Semi-constants
 var WIDTH = window.innerWidth,
 	HEIGHT = window.innerHeight,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
-	WALLHEIGHT = UNITSIZE * 3,
 	MOVESPEED = 1000,
-	LOOKSPEED = 0.075
+	LOOKSPEED = 0.075;
 
 
 // Global vars
@@ -148,8 +147,8 @@ function init() {
 
 
 	// Display HUD
-	$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
-	$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
+	//$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
+	//$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
 	$('body').append('<div id="credits"><p>Created by <a href="http://www.isaacsukin.com/">Isaac Sukin</a> using <a href="http://mrdoob.github.com/three.js/">Three.js</a><br />WASD to move, mouse to look, click to shoot</p></div>');
 
 	// Set up "hurt" flash
@@ -157,20 +156,6 @@ function init() {
 	$('#hurt').css({ width: WIDTH, height: HEIGHT, });
 }
 
-// create an AudioListener and add it to the camera
-
-// // create a global audio source
-// console.log(listener);
-// var sound = new t.Audio(listener);
-
-// // load a sound and set it as the Audio object's buffer
-// var audioLoader = new t.AudioLoader();
-// audioLoader.load('./sounds/scary_flashback.mp3', function (buffer) {
-// 	sound.setBuffer(buffer);
-// 	sound.setLoop(true);
-// 	sound.setVolume(0.5);
-// 	sound.play();
-// });
 
 // Helper function for browser frames
 function animate() {
@@ -203,14 +188,6 @@ function render() {
 		scene.remove(key2Remove);
 	}
 
-	// if (cam.position.x > 2000) {
-	// 	scene.__lights[0].intensity = 0;
-	// 	scene.__lights[1].intensity = 0;
-	// }
-	// else if (cam.position.x <= 2000) {
-	// 	scene.__lights[0].intensity = 0.5;
-	// 	scene.__lights[1].intensity = 1;
-	// }
 
 	var delta = clock.getDelta();
 	controls.update(delta); // Move camera
@@ -218,21 +195,8 @@ function render() {
 
 	renderer.render(scene, cam); // Repaint
 }
-// Death
-// 	if (health <= 0) {
-// 		runAnim = false;
-// 		$(renderer.domElement).fadeOut();
-// 		$('#radar, #hud, #credits').fadeOut();
-// 		$('#intro').fadeIn();
-// 		$('#intro').html('you reached the exit');
-// 		$('#intro').one('click', function () {
-// 			location = location;
-// 		});
-// 	}
-// }
 
-// Set up the objects in the world
-// var cc = 0;
+
 export function changeMovementSpeed(number) {
 	MOVESPEED = number;
 }
@@ -244,8 +208,7 @@ export var addObjectDynamically = function (number) {
 		scene.add(wheelChair2);
 	}
 	alert("yeet");
-
-}
+};
 
 
 export function setupScene() {
