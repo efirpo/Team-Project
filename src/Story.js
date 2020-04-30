@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
+import "./sounds/team-week-game-metal.mp3";
 import "./images/outside.png"; import "./images/trees.jpg";
 import "./images/disturbed.jpg"; import "./images/doorbricks.jpg";
 import * as THREE from 'three';
@@ -28,6 +29,7 @@ let someFlag8 = false;
 let firstDoorOpened = false;
 let secondDoorOpened = false;
 let thirdDoorOpened = false;
+let soundMetal;
 
 
 let storyPoints = [0, 0, 0, 0, 0, 0];
@@ -50,10 +52,10 @@ var addAudio = function (soundString, vol, loop) {
 export function checkStoryTriggers(cam, scene) {
   if ((cam.position.x > 1800 && cam.position.x < 2000) && (cam.position.z > 250 && cam.position.z < 500) && (scene.children[3].rotation.y >= -1.8)) {
     scene.children[3].rotation.y -= .03;
-    if (endGameTimerStarted == false) {
-      gameOver();
-      endGameTimerStarted = true;
-    }
+    // if (endGameTimerStarted == false) {
+    //   gameOver();
+    //   endGameTimerStarted = true;
+    // }
     if (!firstDoorOpened) {
       addAudio('./assets/sounds/door_open.mp3', .6, false);
       firstDoorOpened = true;
@@ -79,7 +81,7 @@ export function checkStoryTriggers(cam, scene) {
       $("#intro").fadeIn();
       room = true;
     }
-    
+
   }
   if ((cam.position.x > -1500 && cam.position.x < -1000) && (cam.position.z > -2250 && cam.position.z < -2000)) {
     if (scene.children[11].rotation.y < 3.2) {
@@ -93,13 +95,15 @@ export function checkStoryTriggers(cam, scene) {
   }
   if (cam.position.x > 2250 && cam.position.x < 2750 && cam.position.z > 900 && cam.position.z < 1250) {
     if (keyFlag === true) {
-   
+
       if (scene.children[13].rotation.y < 3) {
         scene.children[13].rotation.y += .04;
       }
       else {
         $("#credits p").text("You Escaped");
         escaped = true;
+        soundMetal.setVolume();
+        addAudio("./assets/sounds/door_open.mp3", .6, false);
 
         $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
         $("#intro").css("background-repeat", "no-repeat");
@@ -119,10 +123,49 @@ function gameOver() {
       $('#intro').fadeIn();
       $('#intro').html('you died');
     }
-  }, 180000);
+  }, 45000);
   //escape timer music
 }
+function startTimer(duration) {
+  var start = Date.now(),
+    diff,
+    minutes,
+    seconds;
+  function timer() {
+    // get the number of seconds that have elapsed since 
+    // startTimer() was called
+    diff = duration - (((Date.now() - start) / 1000) | 0);
 
+    // does the same job as parseInt truncates the float
+    minutes = (diff / 60) | 0;
+    seconds = (diff % 60) | 0;
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    storyPoints[3] = (minutes + ":" + seconds);
+    console.log(storyPoints[3]);
+
+    if (diff <= 0) {
+      // add one second so that the count down starts at the full duration
+      // example 05:00 not 04:59
+      start = Date.now() + 1000;
+    }
+  }
+  // we don't want to wait a full second before the timer starts
+  timer();
+  setInterval(timer, 1000);
+}
+
+// function gameOver() {
+//   setTimeout(function () {
+//     if (!escaped) {
+//       $('#intro').fadeIn();
+//       $('#intro').html('you died');
+//     }
+//   }, 180000);
+//   //escape timer music
+// }
 
 export function soundChange(cam) {
 
@@ -136,22 +179,7 @@ export function soundChange(cam) {
 
   //add audio using the name of file
 
-  var startTimer = function (duration, display) {
-    var timer = duration, minutes, seconds;
-    setInterval(function () {
-      minutes = parseInt(timer / 60, 10);
-      seconds = parseInt(timer % 60, 10);
 
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.textContent = minutes + ":" + seconds;
-
-      if (--timer < 0) {
-        timer = duration;
-      }
-    }, 1000);
-  };
 
   if (cam.position.x > 2504 && cam.position.x < 2750 && cam.position.z > -1800 && cam.position.z < -1500) {
     if (keyFlag === false) {
@@ -176,6 +204,7 @@ export function soundChange(cam) {
         addAudio("./assets/sounds/intro_song.mp3", .5, true);
       }
       else {
+        soundMetal.setVolume(0);
         $("#credits p").text("You Escaped");
         escaped = true;
       }
@@ -196,13 +225,13 @@ export function soundChange(cam) {
 
     addAudio('./assets/sounds/ambient_song.mp3', .2, true);
 
-  } 
+  }
 
   if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300 && someFlag5 === false) {
     someFlag5 = true;
 
     addAudio('./assets/sounds/panic_heartbeat.mp3', .4, false);
-    changeMovementSpeed(700);
+    //changeMovementSpeed(700);
 
   } else if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300) {
     if (!someFlag8) {
@@ -216,6 +245,30 @@ export function soundChange(cam) {
       I cannot face my master having abandoned him, having seen him weak.`);
       $("#intro").fadeIn();
       someFlag8 = true;
+      addAudio('', .5, false);
+
+
+      let listenerMetal = new THREE.AudioListener();
+      cam.add(listenerMetal);
+
+      soundMetal = new THREE.Audio(listenerMetal);
+      let audioLoaderMetal = new THREE.AudioLoader();
+
+      audioLoaderMetal.load("./assets/sounds/team-week-game-metal.mp3", function (buffer) {
+        soundMetal.setBuffer(buffer);
+        soundMetal.setLoop(true);
+        soundMetal.setVolume(.5);
+        soundMetal.play();
+      });
+
+
+
+      if (endGameTimerStarted == false) {
+        gameOver();
+        endGameTimerStarted = true;
+        startTimer(45);
+        $('body').append('<div id="hurt"></div>');
+      }
     }
   }
 

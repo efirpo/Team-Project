@@ -170,7 +170,7 @@ let keyFlag = false;
 
 // Update and display
 function render() {
-	$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
+
 	checkStoryTriggers(cam, scene);
 	soundChange(cam);
 	scene.children[1].position.x = cam.position.x;
@@ -186,6 +186,12 @@ function render() {
 		keyFlag = true;
 		let key2Remove = scene.getObjectByName('key2');
 		scene.remove(key2Remove);
+	}
+
+	if (whenChange[3] !== 0) {
+		$("#credits p").text(whenChange[3]);
+	} else {
+		$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
 	}
 
 
