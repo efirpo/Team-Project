@@ -230,6 +230,7 @@ export function soundChange(cam) {
         addAudio("./assets/sounds/scary_flashback.mp3", .4, false);
         addAudio("./assets/sounds/panic_heartbeat.mp3", .5, false);
       } else {
+        storyPoints[5] = 1;
         $("#credits p").text("You need a key!");
       }
     }
