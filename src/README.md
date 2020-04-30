@@ -8,7 +8,7 @@
 ## Preview
 
 
-[![Landing Page Preview](images/game2.png)]
+[![Landing Page Preview](src/images/game2.png)]
 
 
 
