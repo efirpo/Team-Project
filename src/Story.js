@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
-import "./sounds/team-week-game-metal.mp3";
+import "./sounds/team-week-game-metal.mp3"; import "./sounds/happy-end.mp3";
 import "./images/outside.png"; import "./images/trees.jpg";
 import "./images/disturbed.jpg"; import "./images/doorbricks.jpg";
 import * as THREE from 'three';
@@ -13,6 +13,7 @@ import setupScene from './main.js';
 import addObjectDynamically from "./main.js";
 import changeMovementSpeed from "./main.js";
 import { cam } from './main.js';
+
 
 var endGameTimerStarted = false;
 var escaped = false;
@@ -29,6 +30,8 @@ let someFlag8 = false;
 let firstDoorOpened = false;
 let secondDoorOpened = false;
 let thirdDoorOpened = false;
+let endMusicFlag = false;
+let happyFlag = false;
 let soundMetal;
 
 
@@ -102,8 +105,13 @@ export function checkStoryTriggers(cam, scene) {
       else {
         $("#credits p").text("You Escaped");
         escaped = true;
-        soundMetal.setVolume();
-        addAudio("./assets/sounds/door_open.mp3", .6, false);
+
+
+        if (!endMusicFlag) {
+          endMusicFlag = true;
+          soundMetal.isPlaying = false;
+        }
+
 
         $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
         $("#intro").css("background-repeat", "no-repeat");
@@ -126,6 +134,8 @@ function gameOver() {
   }, 45000);
   //escape timer music
 }
+
+// if we want to display the timer, we need to use this
 function startTimer(duration) {
   var start = Date.now(),
     diff,
@@ -140,11 +150,16 @@ function startTimer(duration) {
     minutes = (diff / 60) | 0;
     seconds = (diff % 60) | 0;
 
+    if (seconds === 0) {
+      storyPoints[4] = 1;
+    }
+
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
+
+    //animating the timer
     storyPoints[3] = (minutes + ":" + seconds);
-    console.log(storyPoints[3]);
 
     if (diff <= 0) {
       // add one second so that the count down starts at the full duration
@@ -245,7 +260,7 @@ export function soundChange(cam) {
       I cannot face my master having abandoned him, having seen him weak.`);
       $("#intro").fadeIn();
       someFlag8 = true;
-      addAudio('', .5, false);
+
 
 
       let listenerMetal = new THREE.AudioListener();
@@ -297,5 +312,11 @@ export function soundChange(cam) {
       addAudio('./assets/sounds/panic_heartbeat.mp3', .4, false);
     }
   }
+
+  if (escaped === true && !happyFlag) {
+    happyFlag = true;
+    addAudio("./assets/sounds/happy-end.mp3", .5, true);
+  }
+
   return storyPoints;
 }

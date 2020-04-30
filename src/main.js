@@ -103,6 +103,10 @@ $(document).ready(function () {
 
 	});
 
+	// $("#play-again").click(function () {
+	// 	location.reload();
+	// });
+
 
 });
 
@@ -192,6 +196,11 @@ function render() {
 		$("#credits p").text(whenChange[3]);
 	} else {
 		$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
+	}
+
+	if (whenChange[4] === 1) {
+		runAnim = false;
+		$("#credits p").html('<button type="button" id="play-again">Play Again?</button>');
 	}
 
 
