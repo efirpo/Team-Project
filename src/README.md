@@ -7,7 +7,8 @@
 
 ## Preview
 
-[![Landing Page Preview](./../assets/images/game.png)]
+
+
 [![Landing Page Preview](./../asset/images/game2.png)]
 
 **[View Live Preview]()**
