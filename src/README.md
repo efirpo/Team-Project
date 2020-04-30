@@ -5,12 +5,6 @@
 #### By _**Chris H., DJZ, Ethan F., Mai C.**_
 
 
-## Preview
-
-
-[![Landing Page Preview](src/images/game2.png)]
-
-
 
 ## Description
 
