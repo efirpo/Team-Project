@@ -77,7 +77,7 @@ export function checkStoryTriggers(cam, scene) {
       $("#intro").css("background-image", "url(./assets/images/outside.png)");
       $("#intro").css("background-repeat", "no-repeat");
       $("#intro").css("background-size", "cover");
-      $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
+      $("#intro").css("color", "#c80000", "text-shadow", "-1px -1px 3px #000000");
 
       $("#intro").html(`It’s like a distant dream, all my time before this place.<br><br> Remember… why can't I remember?<br><br> My life out there, with the others… I think there were others.<br><br> 
       I was… a student.<br> Of anatomy.<br> Master came.<br> Told us of a grand experiment in flowery words.<br><br> I think I followed him here after that.<br><br> But how long ago was it…?`);
@@ -116,7 +116,7 @@ export function checkStoryTriggers(cam, scene) {
         $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
         $("#intro").css("background-repeat", "no-repeat");
         $("#intro").css("background-size", "cover");
-        $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
+        $("#intro").css("color", "#FFFFFF", "text-shadow", "#000000 1px 1px 2px");
 
         $("#intro").html(`Trees...<br><br> Green...<br><br>I'd almost forgotten...`);
         $("#intro").fadeIn();
@@ -271,11 +271,10 @@ export function soundChange(cam) {
 
       audioLoaderMetal.load("./assets/sounds/team-week-game-metal.mp3", function (buffer) {
         soundMetal.setBuffer(buffer);
-        soundMetal.setLoop(true);
+        soundMetal.setLoop(false);
         soundMetal.setVolume(.5);
         soundMetal.play();
       });
-
 
 
       if (endGameTimerStarted == false) {
