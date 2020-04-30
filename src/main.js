@@ -291,7 +291,7 @@ export function setupScene() {
 	directionalLight.position.set(0, 1, 2);
 	scene.add(directionalLight);
 
-	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2],[2600,250, 870, 1]];
+	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2],[2800,250, 813, 1]];
 	for (let i = 0; i < ourDoors.length; i++) {
 		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
 		scene.add(door[0]);
@@ -355,16 +355,29 @@ export function setupScene() {
 	let toolsTable = new t.toolsTable(294, 0, -1446, 2);
 	scene.add(toolsTable);
 
+	let table = new t.table(200, 200, -2358, 6);
+	scene.add(table);
+//-2085,-68
 	var wheelChair = new t.wheelChair(564, 150, -450, -2);
 	scene.add(wheelChair);
 	let chair = new t.chair(-2402, 145, -1737, -3);
 	scene.add(chair);
 
+	let chair2 = new t.chair(-2085, 100, 108, 1);
+	chair2.rotateX(Math.PI / 2);
+	scene.add(chair2);
+
+	let picture1 = new t.pFrame1(709, 300, -1078, 1);
+	scene.add(picture1);
+	
+
+	
 	let finalWallGeo = new THREE.BoxGeometry(250, 540, 250);
   let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
 	let wallpiece = new THREE.Mesh(finalWallGeo, wallskin);
 	wallpiece.position.set(2875,270,1125);
 	scene.add(wallpiece);
+
 
 }
 
