@@ -66,7 +66,7 @@ var WIDTH = window.innerWidth,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
 	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 1000,
+	MOVESPEED = 400,
 	LOOKSPEED = 0.075
 
 
@@ -88,7 +88,7 @@ $(document).ready(function () {
 	Doubt crawls through my veins where once was warmth. <br>
 	<br>
 	How long have I been within these walls...</div>`);
-	
+
 	$("#intro").css("background-image", "linear-gradient( #777d78, #474d48, #000000)");
 
 	$('#intro').css({ height: HEIGHT }).on('click', function (e) {
@@ -349,9 +349,9 @@ export function setupScene() {
 	}
 
 	let finalWallGeo = new THREE.BoxGeometry(250, 540, 250);
-  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
+	let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
 	let wallpiece = new THREE.Mesh(finalWallGeo, wallskin);
-	wallpiece.position.set(2875,270,1125);
+	wallpiece.position.set(2875, 270, 1125);
 	scene.add(wallpiece);
 
 }
