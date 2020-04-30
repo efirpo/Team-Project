@@ -8,20 +8,21 @@ import "./images/tiledfloor.jpg"; import "./images/wood1.jpg"; import "./images/
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import { CameraHelper } from 'three';
 // new table texture, new wall texture
-import './images/woodtable1.jpg'; import './images/bricksseamless.jpg'
+import './images/woodtable1.jpg'; import './images/bricksseamless.jpg';
 //wheelchair textures 
 import "./images/wheelchair/wheel.png"; import './images/wheelchair/tire.png'; import './images/wheelchair/leather.jpg'; import './images/wheelchair/back.jpeg'; import './images/wheelchair/steel1.jpeg';
 //surgery table textures
-import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg'
+import './images/surgery/slab2.jpg'; import './images/surgery/slab3.jpg'; import './images/surgery/surgerytools.jpg';
 // door textures
-import './images/doors/brassknob.jpg'; import './images/doors/metaldoor-fixed.jpg'; import './images/doors/door931-fixed.jpg'
+import './images/doors/brassknob.jpg'; import './images/doors/metaldoor-fixed.jpg'; import './images/doors/door931-fixed.jpg';
 // key textures
-import './images/gold.jpg'
+import './images/gold.jpg';
 //bed textures
-import './images/dirty-cloth.jpg'
+import './images/dirty-cloth.jpg';
 //chair textures
-import './images/chairwood.jpg'
-import './images/escape_texture.jpg'
+import './images/chairwood.jpg';
+import './images/escape_texture.jpg';
+import './images/doorbricks.jpg';
 
 
 /**
@@ -65,9 +66,8 @@ var WIDTH = window.innerWidth,
 	HEIGHT = window.innerHeight,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
-	WALLHEIGHT = UNITSIZE * 3,
-	MOVESPEED = 400,
-	LOOKSPEED = 0.075
+	MOVESPEED = 1000,
+	LOOKSPEED = 0.075;
 
 
 // Global vars
@@ -97,7 +97,6 @@ $(document).ready(function () {
 		$(this).fadeOut();
 		if (!gameStarted) {
 			init();
-			setInterval(drawRadar, 1000);
 			animate();
 			gameStarted = true;
 		}
@@ -128,34 +127,9 @@ function init() {
 	controls.lookVertical = false; // Temporary solution; play on flat surfaces only
 	controls.noFly = true;
 
-	// listener = new t.AudioListener();
-	// console.log(listener);
-	// cam.add(listener);
-
-
-	// var listener = new THREE.AudioListener();
-	// cam.add(listener);
-
-	// var sound = new THREE.Audio(listener);
-
-	// var audioLoader = new THREE.AudioLoader();
-
-	// var loaderLoader = new THREE.AudioLoader();
 
 	// World objects
 	setupScene();
-
-
-
-	// audioLoader.load('./assets/sounds/ambient_song.mp3', function (buffer) {
-	// 	sound.setBuffer(buffer);
-	// 	sound.setLoop(true);
-	// 	sound.setVolume(0.5);
-	// 	sound.play();
-	// });
-
-
-
 
 
 	// Handle drawing as WebGL (faster than Canvas but less supported)
@@ -171,14 +145,10 @@ function init() {
 	// Track mouse position so we know where to shoot
 	document.addEventListener('mousemove', onDocumentMouseMove, false);
 
-	// Shoot on click
-	$(document).click(function (e) {
-		e.preventDefault;
-	});
 
 	// Display HUD
-	$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
-	$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
+	//$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
+	//$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
 	$('body').append('<div id="credits"><p>Created by <a href="http://www.isaacsukin.com/">Isaac Sukin</a> using <a href="http://mrdoob.github.com/three.js/">Three.js</a><br />WASD to move, mouse to look, click to shoot</p></div>');
 
 	// Set up "hurt" flash
@@ -186,20 +156,6 @@ function init() {
 	$('#hurt').css({ width: WIDTH, height: HEIGHT, });
 }
 
-// create an AudioListener and add it to the camera
-
-// // create a global audio source
-// console.log(listener);
-// var sound = new t.Audio(listener);
-
-// // load a sound and set it as the Audio object's buffer
-// var audioLoader = new t.AudioLoader();
-// audioLoader.load('./sounds/scary_flashback.mp3', function (buffer) {
-// 	sound.setBuffer(buffer);
-// 	sound.setLoop(true);
-// 	sound.setVolume(0.5);
-// 	sound.play();
-// });
 
 // Helper function for browser frames
 function animate() {
@@ -232,14 +188,6 @@ function render() {
 		scene.remove(key2Remove);
 	}
 
-	// if (cam.position.x > 2000) {
-	// 	scene.__lights[0].intensity = 0;
-	// 	scene.__lights[1].intensity = 0;
-	// }
-	// else if (cam.position.x <= 2000) {
-	// 	scene.__lights[0].intensity = 0.5;
-	// 	scene.__lights[1].intensity = 1;
-	// }
 
 	var delta = clock.getDelta();
 	controls.update(delta); // Move camera
@@ -247,21 +195,8 @@ function render() {
 
 	renderer.render(scene, cam); // Repaint
 }
-// Death
-// 	if (health <= 0) {
-// 		runAnim = false;
-// 		$(renderer.domElement).fadeOut();
-// 		$('#radar, #hud, #credits').fadeOut();
-// 		$('#intro').fadeIn();
-// 		$('#intro').html('you reached the exit');
-// 		$('#intro').one('click', function () {
-// 			location = location;
-// 		});
-// 	}
-// }
 
-// Set up the objects in the world
-// var cc = 0;
+
 export function changeMovementSpeed(number) {
 	MOVESPEED = number;
 }
@@ -273,8 +208,7 @@ export var addObjectDynamically = function (number) {
 		scene.add(wheelChair2);
 	}
 	alert("yeet");
-
-}
+};
 
 
 export function setupScene() {
@@ -287,25 +221,26 @@ export function setupScene() {
 	flashlight.target = cam;
 	scene.add(flashlight);
 
-	var directionalLight = new THREE.DirectionalLight(0xffffff, 0.01);
-	directionalLight.position.set(0, 1, 0);
+	var directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	directionalLight.position.set(0, 1, 2);
 	scene.add(directionalLight);
 
-	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2]];
+
+	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2710, 250, -875, 2], [-1575, 250, -1875, 2], [2750, 275, 1125, 2]];
+
 	for (let i = 0; i < ourDoors.length; i++) {
 		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
 		scene.add(door[0]);
 		scene.add(door[1]);
+
 	}
-
-
-
 
 	// Geometry: floor
 	var floor = new t.Mesh(
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
 		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
+
 	scene.add(floor);
 
 	// Geometry: ceiling
@@ -313,11 +248,11 @@ export function setupScene() {
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
 		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
+
 	ceiling.position.y = 750;
 	scene.add(ceiling);
 
-	var wheelChair = new t.wheelChair(250, 150, -1000, 2);
-	scene.add(wheelChair);
+
 
 	var keyTable = new t.table(200, 175, 2625, -1650);
 	scene.add(keyTable);
@@ -347,12 +282,37 @@ export function setupScene() {
 		var aWall = new t.wall(myWalls[i][0], myWalls[i][1], myWalls[i][2], myWalls[i][3], myWalls[i][4]);
 		scene.add(aWall);
 	}
+	let mattress = new t.bed(1265, 100, 120, 1.5);
+	scene.add(mattress);
+	let base = new t.surgeryTable(397, 50, -1100, -7);
+	scene.add(base);
+
+	let toolsTable = new t.toolsTable(294, 0, -1446, 2);
+	scene.add(toolsTable);
+
+	let table = new t.table(200, 200, -2358, 6);
+	scene.add(table);
+	//-2085,-68
+	var wheelChair = new t.wheelChair(564, 150, -450, -2);
+	scene.add(wheelChair);
+	let chair = new t.chair(-2402, 145, -1737, -3);
+	scene.add(chair);
+
+	let chair2 = new t.chair(-2085, 100, 108, 1);
+	chair2.rotateX(Math.PI / 2);
+	scene.add(chair2);
+
+	let picture1 = new t.pFrame1(709, 300, -1078, 1);
+	scene.add(picture1);
+
+
 
 	let finalWallGeo = new THREE.BoxGeometry(250, 540, 250);
 	let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
 	let wallpiece = new THREE.Mesh(finalWallGeo, wallskin);
 	wallpiece.position.set(2875, 270, 1125);
 	scene.add(wallpiece);
+
 
 }
 
@@ -380,34 +340,6 @@ function checkWallCollision(v) {
 	return map[c.x][c.z] > 0;
 }
 
-// Radar
-function drawRadar() {
-	var c = getMapSector(cam.position), context = document.getElementById('radar').getContext('2d');
-	context.font = '10px Helvetica';
-	for (var i = 0; i < mapW; i++) {
-		for (var j = 0, m = map[i].length; j < m; j++) {
-
-			if (i == c.x && j == c.z) {
-				context.fillStyle = '#AA33FF';
-				context.fillRect(i * 8, j * 8, (i + 1) * 8, (j + 1) * 8);
-			}
-			// else if (d > 0 && d < 10) {
-			// 	context.fillStyle = '#FF0000';
-			// 	context.fillRect(i * 20, j * 20, (i+1)*20, (j+1)*20);
-			// 	context.fillStyle = '#000000';
-			// 	context.fillText(''+d, i*20+8, j*20+12);
-			// }
-			else if (map[i][j] > 0) {
-				context.fillStyle = '#666666';
-				context.fillRect(i * 8, j * 8, (i + 1) * 8, (j + 1) * 8);
-			}
-			else {
-				context.fillStyle = '#CCCCCC';
-				context.fillRect(i * 8, j * 8, (i + 1) * 8, (j + 1) * 8);
-			}
-		}
-	}
-}
 
 function onDocumentMouseMove(e) {
 	e.preventDefault();
@@ -443,4 +375,3 @@ $(window).blur(function () {
 function getRandBetween(lo, hi) {
 	return parseInt(Math.floor(Math.random() * (hi - lo + 1)) + lo, 10);
 }
-
