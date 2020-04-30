@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>The Experiment</title>
+  <style>
+    body {
+
+      color: #FFFFFF;
+      cursor: crosshair;
+      font-size: 32px;
+      font-family: Helvetica, sans-serif;
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    #hud {
+      bottom: 10px;
+      position: absolute;
+      right: 10px;
+      z-index: 100;
+    }
+
+    #credits {
+      font-size: 12px;
+      position: absolute;
+      text-align: center;
+      top: 10px;
+      width: 100%;
+      z-index: 100;
+    }
+
+    p {
+      /* background-color: #EEEEEE; */
+      border: 1px solid black;
+      display: inline-block;
+      margin: 0;
+      padding: 5px;
+    }
+
+    #radar {
+      background-color: #EEEEEE;
+      border: 1px solid black;
+      bottom: 10px;
+      left: 10px;
+      position: absolute;
+      z-index: 100;
+    }
+
+    #intro {
+
+      /* background-image: linear-gradient( #777d78, #474d48, #000000); */
+      color: #FFFFFF;
+      font-size: 32px;
+      padding: 120px;
+      text-align: center;
+      z-index: 1001;
+      cursor: crosshair;
+      font-family: Georgia, Helvetica, sans-serif;
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    #hurt {
+      background-color: red;
+      display: none;
+      left: 0;
+      opacity: 0.15;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      z-index: 1002;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<script type="text/javascript" src="bundle.js"></script></body>
+
+</html>
