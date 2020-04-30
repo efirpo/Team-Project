@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
 
@@ -149,3 +150,5 @@ export function soundChange(cam) {
   }
   return storyPoints;
 }
+=======
+>>>>>>> b5ce8331912c7467655d90265147de2a033d92a3

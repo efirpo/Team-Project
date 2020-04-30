@@ -372,7 +372,7 @@ THREE.bed = function (PositionX, PositionY, PositionZ, Orientation) {
 
   let headboardGeo = new THREE.BoxGeometry(15 * 2.5, 90 * 2.5, 132 * 2.5);
   let headboardMesh = new THREE.MeshLambertMaterial({ color: 0xfa35cd });
-  let headboard = new THREE.Mesh(headboardGeo, headboardMesh)
+  let headboard = new THREE.Mesh(headboardGeo, headboardMesh);
   mattress.add(headboard);
   headboard.position.set(-122 * 2.5, 30 * 2.5, 0)
 
