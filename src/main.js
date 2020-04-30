@@ -23,6 +23,8 @@ import './images/dirty-cloth.jpg';
 import './images/chairwood.jpg';
 import './images/escape_texture.jpg';
 import './images/doorbricks.jpg';
+//title
+import './images/experiment-title.png';
 
 
 /**
@@ -66,7 +68,7 @@ var WIDTH = window.innerWidth,
 	HEIGHT = window.innerHeight,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
-	MOVESPEED = 1000,
+	MOVESPEED = 500,
 	LOOKSPEED = 0.075;
 
 
@@ -77,17 +79,18 @@ var runAnim = true, mouse = { x: 0, y: 0 };
 $(document).ready(function () {
 	var gameStarted = false;
 
-	$('body').append(`<div id="intro">How long has it been?<br> 
+	$('body').html(`<div id="intro"><img src="./assets/images/experiment-title.png"><br><br>How long has it been?<br> 
 <br>
 	I haven't had an injection since God knows when. <br>
 	<br>
 	I long for the purpose that I felt under master's loving care, and now that purpose has given way to a sense of dread.<br>
 	<br>
-	I am lost. <br>
-	<br>
 	Doubt crawls through my veins where once was warmth. <br>
 	<br>
-	How long have I been within these walls...</div>`);
+	How long have I been within these walls... <br>
+	<br>
+	I need to find a way out.
+	</div>`);
 
 	$("#intro").css("background-image", "linear-gradient( #777d78, #474d48, #000000)");
 
@@ -210,21 +213,6 @@ function render() {
 
 	renderer.render(scene, cam); // Repaint
 }
-
-
-export function changeMovementSpeed(number) {
-	MOVESPEED = number;
-}
-
-export var addObjectDynamically = function (number) {
-	alert(number);
-	if (number === 2) {
-		var wheelChair2 = new t.wheelChair(-1240, 150, 190, 2);
-		scene.add(wheelChair2);
-	}
-	alert("yeet");
-};
-
 
 export function setupScene() {
 
