@@ -3,7 +3,7 @@
 import $ from 'jquery';
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
-import "./images/outside.png";
+import "./images/outside.png"; import "./images/trees.jpg";
 import "./images/disturbed.jpg";
 import * as THREE from 'three';
 import t from './main.js';
@@ -75,7 +75,6 @@ export function checkStoryTriggers(cam, scene) {
       $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
 
       $("#intro").html(`It’s like a distant dream, all my time before this place.<br><br> Remember… why can't I remember?<br><br> My life out there, with the others… I think there were others.<br><br> 
-
       I was… a student.<br> Of anatomy.<br> Master came.<br> Told us of a grand experiment in flowery words.<br><br> I think I followed him here after that.<br><br> But how long ago was it…?`);
       $("#intro").fadeIn();
       room = true;
@@ -151,6 +150,8 @@ export function soundChange(cam) {
     }
   }
 
+
+
   if (cam.position.x > 2250 && cam.position.x < 2750 && cam.position.z > 900 && cam.position.z < 1250) {
     if (keyFlag === true) {
       if (someFlag6 === false) {
@@ -160,6 +161,14 @@ export function soundChange(cam) {
       } else {
         $("#credits p").text("You Escaped");
         escaped = true;
+        $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
+        $("#intro").css("background-repeat", "no-repeat");
+        $("#intro").css("background-size", "cover");
+        $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
+
+        $("#intro").html(`Trees...<br><br> Green...<br><br>I'd almost forgotten...`);
+        $("#intro").fadeIn();
+        //****** */
       }
     } else {
       if (someFlag7 === false) {
@@ -178,11 +187,7 @@ export function soundChange(cam) {
 
     addAudio('./assets/sounds/ambient_song.mp3', .2, true);
 
-  } else if (cam.position.z > 700 && cam.position.x > 260) {
-
-    //$("#credits p").text("--i need to get out of here--");
-
-  }
+  } 
 
   if (cam.position.x > -740 && cam.position.x < 745 && cam.position.z > -1700 && cam.position.z < -1300 && someFlag5 === false) {
     someFlag5 = true;
@@ -204,19 +209,13 @@ export function soundChange(cam) {
     someFlag8 = true;
     }
   }
-    $("#intro").html(`I can hazily recall the last experiment.<br><br> As I mopped up the blood and viscera from the stone floor, 
-    the patient woke suddenly.<br><br> In a rage, he knocked my master to the ground with a loud crack as skull met tile, then fainted.<br><br>In a panic I ran to my room.<br><br> 
-    I cannot face my master having abandoned him, having seen him weak.`);
-    $("#intro").fadeIn();
-    someFlag8 = true;
-    }
-  }
 
   if (cam.position.x > -225 && cam.position.x < 225 && cam.position.z < 1250 && cam.position.z > 750) {
     if (someFlag === false) {
       someFlag = true;
       addAudio('./assets/sounds/scary_flashback.mp3', .4, false);
       addAudio('./assets/sounds/panic_heartbeat.mp3', .5, false);
+      addAudio('./assets/sounds/door_attempt.mp3', .5, false);
     }
   }
 

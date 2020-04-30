@@ -21,6 +21,7 @@ import './images/gold.jpg'
 import './images/dirty-cloth.jpg'
 //chair textures
 import './images/chairwood.jpg'
+import './images/escape_texture.jpg'
 
 
 /**
@@ -34,7 +35,7 @@ export var map =
 	[ // 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 0
 		[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], // 1
-		[1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 2
+		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 2
 		[1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1], // 3
 		[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 4
 		[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1], // 5
@@ -45,7 +46,7 @@ export var map =
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1], // 10
 		[1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1], // 11
 		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 12
-		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1], // 13
+		[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1], // 13
 		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 14
 		[1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], // 15
 		[1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1], // 16
@@ -359,6 +360,11 @@ export function setupScene() {
 	let chair = new t.chair(-2402, 145, -1737, -3);
 	scene.add(chair);
 
+	let finalWallGeo = new THREE.BoxGeometry(250, 540, 250);
+  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
+	let wallpiece = new THREE.Mesh(finalWallGeo, wallskin);
+	wallpiece.position.set(2875,270,1125);
+	scene.add(wallpiece);
 
 }
 
