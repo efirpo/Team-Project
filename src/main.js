@@ -22,6 +22,7 @@ import './images/dirty-cloth.jpg'
 //chair textures
 import './images/chairwood.jpg'
 import './images/escape_texture.jpg'
+import './images/doorbricks.jpg'
 
 
 /**
@@ -97,7 +98,6 @@ $(document).ready(function () {
 		$(this).fadeOut();
 		if (!gameStarted) {
 			init();
-			setInterval(drawRadar, 1000);
 			animate();
 			gameStarted = true;
 		}
@@ -128,34 +128,9 @@ function init() {
 	controls.lookVertical = false; // Temporary solution; play on flat surfaces only
 	controls.noFly = true;
 
-	// listener = new t.AudioListener();
-	// console.log(listener);
-	// cam.add(listener);
-
-
-	// var listener = new THREE.AudioListener();
-	// cam.add(listener);
-
-	// var sound = new THREE.Audio(listener);
-
-	// var audioLoader = new THREE.AudioLoader();
-
-	// var loaderLoader = new THREE.AudioLoader();
 
 	// World objects
 	setupScene();
-
-
-
-	// audioLoader.load('./assets/sounds/ambient_song.mp3', function (buffer) {
-	// 	sound.setBuffer(buffer);
-	// 	sound.setLoop(true);
-	// 	sound.setVolume(0.5);
-	// 	sound.play();
-	// });
-
-
-
 
 
 	// Handle drawing as WebGL (faster than Canvas but less supported)
@@ -171,10 +146,6 @@ function init() {
 	// Track mouse position so we know where to shoot
 	document.addEventListener('mousemove', onDocumentMouseMove, false);
 
-	// Shoot on click
-	$(document).click(function (e) {
-		e.preventDefault;
-	});
 
 	// Display HUD
 	$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
@@ -292,7 +263,7 @@ export function setupScene() {
 	scene.add(directionalLight);
 
 
-	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2], [2750, 275, 1125, 2]];
+	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2710, 250, -875, 2], [-1575, 250, -1875, 2], [2750, 275, 1125, 2]];
 
 	for (let i = 0; i < ourDoors.length; i++) {
 		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
@@ -406,34 +377,6 @@ function checkWallCollision(v) {
 	return map[c.x][c.z] > 0;
 }
 
-// Radar
-function drawRadar() {
-	var c = getMapSector(cam.position), context = document.getElementById('radar').getContext('2d');
-	context.font = '10px Helvetica';
-	for (var i = 0; i < mapW; i++) {
-		for (var j = 0, m = map[i].length; j < m; j++) {
-
-			if (i == c.x && j == c.z) {
-				context.fillStyle = '#AA33FF';
-				context.fillRect(i * 8, j * 8, (i + 1) * 8, (j + 1) * 8);
-			}
-			// else if (d > 0 && d < 10) {
-			// 	context.fillStyle = '#FF0000';
-			// 	context.fillRect(i * 20, j * 20, (i+1)*20, (j+1)*20);
-			// 	context.fillStyle = '#000000';
-			// 	context.fillText(''+d, i*20+8, j*20+12);
-			// }
-			else if (map[i][j] > 0) {
-				context.fillStyle = '#666666';
-				context.fillRect(i * 8, j * 8, (i + 1) * 8, (j + 1) * 8);
-			}
-			else {
-				context.fillStyle = '#CCCCCC';
-				context.fillRect(i * 8, j * 8, (i + 1) * 8, (j + 1) * 8);
-			}
-		}
-	}
-}
 
 function onDocumentMouseMove(e) {
 	e.preventDefault();

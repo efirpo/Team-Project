@@ -4,7 +4,7 @@ import $ from 'jquery';
 import "./sounds/intro_song.mp3"; import "./sounds/ambient_song.mp3"; import "./sounds/steps_center.mp3"; import "./sounds/panic_heartbeat.mp3"; import "./sounds/slowing_to_slow.mp3";
 import "./sounds/metalClick.ogg"; import "./sounds/scary_flashback.mp3"; import "./sounds/add_item.mp3"; import "./sounds/door_attempt.mp3"; import "./sounds/door_open.mp3";
 import "./images/outside.png"; import "./images/trees.jpg";
-import "./images/disturbed.jpg";
+import "./images/disturbed.jpg"; import "./images/doorbricks.jpg";
 import * as THREE from 'three';
 import t from './main.js';
 import scene from './main.js';

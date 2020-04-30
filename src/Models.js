@@ -333,6 +333,13 @@ THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
   zeroPoint.add(doorFrameTop);
   doorFrameTop.position.set(0, 125 * 2, 0);
 
+  let overDoorGeo = new THREE.BoxBufferGeometry(260, 300, 70);
+  let overDoorMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/doorbricks.jpg") });
+  let wallOverPiece = new THREE.Mesh(overDoorGeo, overDoorMesh);
+  doorFrameTop.add(wallOverPiece);
+  wallOverPiece.position.set(0, 160, 0);
+
+
   let doorFrameSidesGeo = new THREE.BoxBufferGeometry(20 * 2, 270 * 2, 30 * 2);
   let doorFrameSidesMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/steel1.jpeg') });
   let doorFrameLeft = new THREE.Mesh(doorFrameSidesGeo, doorFrameSidesMesh);
