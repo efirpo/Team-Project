@@ -32,6 +32,8 @@ THREE.pFrame1 = function (PositionX, PositionY, PositionZ, Orientation) {
   let canvasGeo = new THREE.BoxBufferGeometry(50, 70, 6);
   let canvasMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/flowergirl.jpg') });
   let canvas = new THREE.Mesh(canvasGeo, canvasMesh);
+  canvas.position.set(PositionX, PositionY, PositionZ);
+  canvas.rotateY(Math.pi/Orientation);
 
   let frameAGeo = new THREE.BoxBufferGeometry(60, 8, 10);
   let frameMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/skulldrawing1.jpg') });
