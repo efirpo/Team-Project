@@ -77,7 +77,7 @@ export function checkStoryTriggers(cam, scene) {
       $("#intro").css("background-image", "url(./assets/images/outside.png)");
       $("#intro").css("background-repeat", "no-repeat");
       $("#intro").css("background-size", "cover");
-      $("#intro").css("color", "#FFFFFF", "text-shadow", "#000000 2px 2px 5px");
+      $("#intro").css("color", "#c80000", "text-shadow", "-1px -1px 3px #000000");
 
       $("#intro").html(`It’s like a distant dream, all my time before this place.<br><br> Remember… why can't I remember?<br><br> My life out there, with the others… I think there were others.<br><br> 
       I was… a student.<br> Of anatomy.<br> Master came.<br> Told us of a grand experiment in flowery words.<br><br> I think I followed him here after that.<br><br> But how long ago was it…?`);

@@ -1,42 +1,31 @@
-A completely browser-based, HTML5 (WebGL) First-Person Shooter game. Originally built for AngelHack 2012 in 24 hours.
-
- - [Play now](http://icecreamyou.github.com/Nemesis/game.html)
- - [Learn how the code works](http://www.isaacsukin.com/news/2012/06/how-build-first-person-shooter-browser-threejs-and-webglhtml5-canvas)
- - [Background and details](http://icecreamyou.github.com/Nemesis/)
- - [About the author](http://www.isaacsukin.com/)
-
-**Update, October 2013:** I wrote a book,
-[Game Development with Three.js](http://www.packtpub.com/game-development-with-three-js/book),
-that explains in detail how to build a fuller in-browser game.
-Check it out if you'd like to learn more!
-
-**Update, February 2018:** This code is now licensed under the [GPL v3](https://tldrlegal.com/license/gnu-general-public-license-v3-(gpl-3)#fulltext).
-
-
 # _The Experiment_
 
-#### _The Experiment is a thrilling horror game, latest update 04/30/20, version 1.0_
+#### _The Experiment is a thrilling horror game, inspired by the game [nemesis](http://icecreamyou.github.com/Nemesis/game.html)  latest update 04/30/20, version 1.0_
 
 #### By _**Chris H., DJZ, Ethan F., Mai C.**_
 
 
 ## Preview
 
-![Landing Page Preview](url-for-img)
+![Landing Page Preview](./../assets/images/game.png)
+![Landing Page Preview](./../asset/images/game2.png)
 
-**[View Live Preview](https://kwicz.github.io/{this-repo}/)**
+**[View Live Preview]()**
 
 ## Description
 
-_{This is a detailed description of your application. Its purpose and usage.  Give as much detail as needed to explain what the application does, and any other information you want users or other developers to have. }_
+_The Experiment is a horror game designed to entertain and scare the Player. The game starts, and you wake up as a person with amnesia, uncertain of where you are. As you explore the rooms in this abandoned building your memory starts to come back. As you start to remember, you realize the gaol of the game is to obtain the key and find your way out before the timer runs out. Hope you enjoy!_
 
 ## Project Specifications
 
 | Behavior | Input | Output |
 |---|---|---|
-|   |   |   |
-|   |   |   |
-|   |   |   |
+| The user clicks the start screen, game initiates | the user clicks | game initiates |
+| the user is able to navigate using the mouse, arrow keys and WASD keys | player presses W |  player moves forward |
+| The player moves over the doors and the allowed doors open  | *player moves over door* |  *door opens* |
+| The player moves over the key object and picks it up | *player moves over key* | *key disapears* |
+| Player runs to door and it opens if they have the key, door stays locked if they didn't pickup key | *player has key* | *end door opens*  |
+
 
 ## Setup/Installation Requirements
 
@@ -45,18 +34,18 @@ _In Terminal:_
 * Navigate to where you want this application to be saved, i.e.:
 ```cd desktop```
 * Clone the file from GitHub with HTTPS
-```git clone https://github.com/kwicz/beep-boop.git```
+```git clone https://github.com/CHuber42/Team-Project.git```
 * Open file in your preferred text editor
-* On Mac: ```open -a {your text editor} beep-boop```
-* On Windows: ```beep-boop```
+* On Mac: ```open -a {your text editor} Team-Project```
+* On Windows: ```Team-Project```
 
 _To Download Manually:_
 
-* Navigate to https://github.com/kwicz/beep-boop.
+* Navigate to https://github.com/CHuber42/Team-Project.
 * Click green "Clone or Download" button.
 * Click "Download ZIP".
 * Click downloaded file to unzip.
-* Open folder called "beep-boop-master".
+* Open folder called "Team-Project-master".
 * Right click "index.html" and select your preferred browser or text editor.
 
 ## Known Bugs
@@ -65,11 +54,20 @@ _No known bugs at this time._
 
 ## Support and contact details
 
-_Have a bug or an issue with this application? [Open a new issue](https://github.com/kwicz/{repo-name}/issues) here on GitHub._
+_Have a bug or an issue with this application? [Open a new issue](https://github.com/CHuber42/Team-Project/issues) here on GitHub._
 
 ## Technologies Used
 
-_{Tell me about the languages and tools you used to create this app. Assume that I know you probably used HTML and CSS. If you did something really cool using only HTML, point that out.}_
+_Eslintrc_
+_Babel_
+_Javascript_
+_CSS_
+_Webpack_
+_Three.js_
+_Webgl_
+_HTML_
+_Jquery_
+
 
 ### License
 

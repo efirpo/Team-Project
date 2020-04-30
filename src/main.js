@@ -23,6 +23,10 @@ import './images/dirty-cloth.jpg';
 import './images/chairwood.jpg';
 import './images/escape_texture.jpg';
 import './images/doorbricks.jpg';
+//pictures
+import './images/flowergirl.jpg';
+import './images/skulldrawing1.jpg';
+import './images/stbart.jpg';
 //title
 import './images/experiment-title.png';
 
@@ -305,8 +309,14 @@ export function setupScene() {
 	chair2.rotateX(Math.PI / 2);
 	scene.add(chair2);
 
-	let picture1 = new t.pFrame1(709, 300, -1078, 1);
+	let picture1 = new t.pFrame2(709, 400, -1078, 2);
 	scene.add(picture1);
+
+	let picture2 = new t.pFrame3(2005, 400, 319, 2);
+	scene.add(picture2);
+
+	let picture3 = new t.pFrame1(-2260, 400, -245, 1);
+	scene.add(picture3);
 
 
 
