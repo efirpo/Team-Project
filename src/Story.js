@@ -92,6 +92,26 @@ export function checkStoryTriggers(cam, scene) {
     }
 
   }
+  if (cam.position.x > 2250 && cam.position.x < 2750 && cam.position.z > 900 && cam.position.z < 1250) {
+    if (keyFlag === true) {
+   
+      if (scene.children[13].rotation.y < 3) {
+        scene.children[13].rotation.y += .04;
+      }
+      else {
+      $("#credits p").text("You Escaped");
+      escaped = true;
+
+      $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
+      $("#intro").css("background-repeat", "no-repeat");
+      $("#intro").css("background-size", "cover");
+      $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
+
+      $("#intro").html(`Trees...<br><br> Green...<br><br>I'd almost forgotten...`);
+      $("#intro").fadeIn();
+      }
+    }
+  }
 }
 
 function gameOver() {
@@ -159,16 +179,10 @@ export function soundChange(cam) {
         someFlag6 = true;
         addAudio("./assets/sounds/door_open.mp3", .4, false);
         addAudio("./assets/sounds/intro_song.mp3", .5, true);
-      } else {
-        $("#credits p").text("You Escaped");
-        escaped = true;
-        $("#intro").css("background-image", "url(./assets/images/trees.jpg)");
-        $("#intro").css("background-repeat", "no-repeat");
-        $("#intro").css("background-size", "cover");
-        $("#intro").css("color", "#FFFFFF", "text-shadow", "#000 1px 1px 3px");
-
-        $("#intro").html(`Trees...<br><br> Green...<br><br>I'd almost forgotten...`);
-        $("#intro").fadeIn();
+      } 
+      else {
+      $("#credits p").text("You Escaped");
+      escaped = true;
         //****** */
       }
     } else {
