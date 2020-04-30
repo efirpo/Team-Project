@@ -88,7 +88,7 @@ $(document).ready(function () {
 	Doubt crawls through my veins where once was warmth. <br>
 	<br>
 	How long have I been within these walls...</div>`);
-	
+
 	$("#intro").css("background-image", "linear-gradient( #777d78, #474d48, #000000)");
 
 	$('#intro').css({ height: HEIGHT }).on('click', function (e) {
@@ -291,7 +291,7 @@ export function setupScene() {
 	directionalLight.position.set(0, 1, 2);
 	scene.add(directionalLight);
 
-	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2],[2800,250, 813, 1]];
+	let ourDoors = [[1875, 250, 550, 1], [125, 250, 710, 1], [-2430, 250, 700, 1], [-2700, 250, -875, 2], [-1575, 250, -1875, 2], [2800, 250, 813, 1]];
 	for (let i = 0; i < ourDoors.length; i++) {
 		let door = THREE.doorSimple(ourDoors[i][0], ourDoors[i][1], ourDoors[i][2], ourDoors[i][3]);
 		scene.add(door[0]);
@@ -299,14 +299,12 @@ export function setupScene() {
 
 	}
 
-
-
-
 	// Geometry: floor
 	var floor = new t.Mesh(
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
 		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
+
 	scene.add(floor);
 
 	// Geometry: ceiling
@@ -314,10 +312,11 @@ export function setupScene() {
 		new t.CubeGeometry(units * UNITSIZE, 10, units * UNITSIZE),
 		new t.MeshLambertMaterial({ map: t.ImageUtils.loadTexture("./assets/images/tiledfloor.jpg") }),
 	);
+	
 	ceiling.position.y = 750;
 	scene.add(ceiling);
 
-	
+
 
 	var keyTable = new t.table(200, 175, 2625, -1650);
 	scene.add(keyTable);
@@ -357,7 +356,7 @@ export function setupScene() {
 
 	let table = new t.table(200, 200, -2358, 6);
 	scene.add(table);
-//-2085,-68
+	//-2085,-68
 	var wheelChair = new t.wheelChair(564, 150, -450, -2);
 	scene.add(wheelChair);
 	let chair = new t.chair(-2402, 145, -1737, -3);
@@ -369,13 +368,13 @@ export function setupScene() {
 
 	let picture1 = new t.pFrame1(709, 300, -1078, 1);
 	scene.add(picture1);
-	
 
-	
+
+
 	let finalWallGeo = new THREE.BoxGeometry(250, 540, 250);
-  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
+	let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/escape_texture.jpg") });
 	let wallpiece = new THREE.Mesh(finalWallGeo, wallskin);
-	wallpiece.position.set(2875,270,1125);
+	wallpiece.position.set(2875, 270, 1125);
 	scene.add(wallpiece);
 
 

@@ -27,6 +27,7 @@ THREE.table = function (SCALE, HEIGHT, PositionX, PositionZ) {
 
   return tableBoard;
 };
+
 THREE.pFrame1 = function (PositionX, PositionY, PositionZ, Orientation) {
   let canvasGeo = new THREE.BoxBufferGeometry(50, 70, 6);
   let canvasMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/flowergirl.jpg') });
@@ -51,7 +52,7 @@ THREE.pFrame1 = function (PositionX, PositionY, PositionZ, Orientation) {
   frameTop.position.set(0, 38, 0)
   frameBottom.position.set(0, -38, 0)
 
-  
+
   return canvas;
 };
 THREE.pFrame2 = function (PositionX, PositionY, PositionZ, Orientation) {
@@ -79,7 +80,7 @@ THREE.pFrame2 = function (PositionX, PositionY, PositionZ, Orientation) {
   frameBottom.position.set(0, -38, 0)
 
 
-  
+
   return canvas;
 };
 
@@ -299,7 +300,7 @@ THREE.toolsTable = function (PositionX, PositionY, PositionZ, Orientation) {
 // door frame
 
 THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
-  
+
 
   let pivot = new THREE.BoxBufferGeometry(1, 1, 1);
   let pivotMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/door931-fixed.jpg') });
@@ -309,7 +310,7 @@ THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
     pivotPoint.rotateY(Math.PI / Orientation);
   }
   else if (Orientation === 1) {
-    pivotPoint.position.set(PositionX-100, PositionY, PositionZ);
+    pivotPoint.position.set(PositionX - 100, PositionY, PositionZ);
   }
 
 
@@ -453,7 +454,7 @@ THREE.bed = function (PositionX, PositionY, PositionZ, Orientation) {
   bedLeg4.position.set(-120 * 2.5, -30 * 2.5, -60 * 2.5);
 
   let headboardGeo = new THREE.BoxGeometry(15 * 2.5, 90 * 2.5, 132 * 2.5);
-  let headboardMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg')});
+  let headboardMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg') });
   let headboard = new THREE.Mesh(headboardGeo, headboardMesh);
   mattress.add(headboard);
   headboard.position.set(-122 * 2.5, 30 * 2.5, 0)
@@ -473,7 +474,7 @@ THREE.wall = function (Xcoord1, Xcoord2, HEIGHT, Zcoord1, Zcoord2) {
   let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/bricksseamless.jpg") });
   let wallpiece = new THREE.Mesh(wallsizing, wallskin);
 
-  wallpiece.position.set(xPosition, HEIGHT/2, zPosition);
+  wallpiece.position.set(xPosition, HEIGHT / 2, zPosition);
   return wallpiece;
 };
 
