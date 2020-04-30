@@ -29,6 +29,7 @@ import './images/skulldrawing1.jpg';
 import './images/stbart.jpg';
 //title
 import './images/experiment-title.png';
+import './images/bricksbloody1.jpg';
 
 
 /**
@@ -72,7 +73,7 @@ var WIDTH = window.innerWidth,
 	HEIGHT = window.innerHeight,
 	ASPECT = WIDTH / HEIGHT,
 	UNITSIZE = 250,
-	MOVESPEED = 500,
+	MOVESPEED = 625,
 	LOOKSPEED = 0.075;
 
 
@@ -160,7 +161,7 @@ function init() {
 	// Display HUD
 	//$('body').append('<canvas id="radar" width="200" height="200"></canvas>');
 	//$('body').append('<div id="hud"><p>Health: <span id="health">100</span><br />Score: <span id="score">0</span></p></div>');
-	$('body').append('<div id="credits"><p>Created by <a href="http://www.isaacsukin.com/">Isaac Sukin</a> using <a href="http://mrdoob.github.com/three.js/">Three.js</a><br />WASD to move, mouse to look, click to shoot</p></div>');
+	$('body').append('<div id="credits"><p></p></div>');
 
 	// Set up "hurt" flash
 	$('body').append('<div id="hurt"></div>');
@@ -199,15 +200,16 @@ function render() {
 		scene.remove(key2Remove);
 	}
 
-	if (whenChange[3] !== 0) {
-		$("#credits p").text(whenChange[3]);
-	} else {
-		$("#credits p").text(`${cam.position.x}, ${cam.position.z}`);
+	if (whenChange[5] !== 0 && whenChange[3] !== 0) {
+		$("#credits p").html(`I need the door key!<br>${whenChange[3]}`);
 	}
+
+	else if (whenChange[3] !== 0) {
+		$("#credits p").html(`I need to escape!<br>${whenChange[3]}`);
+	} 
 
 	if (whenChange[4] === 1) {
 		runAnim = false;
-		$("#credits p").html('<button type="button" id="play-again">Play Again?</button>');
 	}
 
 
@@ -277,7 +279,7 @@ export function setupScene() {
 	/*S Wall*/[1250, 2000, 750, 1255, 1330], [500, 1250, 750, 1255, 1330], [-250, 500, 750, 1255, 1330], [-1000, -250, 750, 1255, 1330], [-1750, -1000, 750, 1255, 1330], [-2500, -1750, 750, 1255, 1330], [-3250, -2500, 750, 1255, 1330], [2775, 2000, 750, 1255, 1330],
 	[750, 250, 750, 250, 500], [995, 750, 750, -250, 500], [1000, 750, 750, -250, -1000], [1000, 750, 750, -1000, -1750], [1000, 750, 750, -1750, -2495], [2255, 2775, 750, -1255, -1495],
 	[2255, 2495, 750, -1495, -2250], [2495, 1875, 750, -2250, -2495], [1255, 1875, 750, -2250, -2495], [1995, 1775, 750, -2000, -1250], [1000, 2000, 750, -255, -745],
-	[1775, 1995, 750, -1250, -750], [1255, 1500, 750, -2250, -1675], [1255, 1500, 750, -1675, -1000], [-250, 250, 750, -5, -245], [750, 250, 750, -5, -245],
+	[1775, 1995, 750, -1250, -750], [1255, 1500, 750, -2250, -1675], [1255, 1500, 750, -1675, -1000], [750, 250, 750, -5, -245],
 	[-250, 250, 750, -1755, -1995], [750, 250, 750, -1755, -1995], [750, 250, 750, -2255, -2495], [-2555, -2745, 750, 745, 0], [-2555, -2745, 750, -750, 0],
 	[-2555, -2745, 750, -2250, -1750], [-2555, -2745, 750, -1750, -1000], [-5, -500, 750, 255, 745], [-500, -1000, 750, 505, 745], [-1000, -1675, 750, 745, 505],
 	[-2300, -1675, 750, 745, 505], [-2555, -1745, 750, -255, -495], [-1745, -1505, 750, 505, -250], [-1745, -1505, 750, -1000, -250], [-1745, -1505, 750, -1000, -1745],
@@ -326,6 +328,12 @@ export function setupScene() {
 	wallpiece.position.set(2875, 270, 1125);
 	scene.add(wallpiece);
 
+	//[-250, 250, 750, -5, -245]
+	let bloodyWallGeo = new THREE.BoxGeometry(500, 750, 240);
+	let bloodyskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/bricksbloody1.jpg") });
+	let bloodypiece = new THREE.Mesh(bloodyWallGeo, bloodyskin);
+	bloodypiece.position.set(0, 375, -125);
+	scene.add(bloodypiece);
 
 }
 
