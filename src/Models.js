@@ -28,6 +28,89 @@ THREE.table = function (SCALE, HEIGHT, PositionX, PositionZ) {
   return tableBoard;
 };
 
+THREE.pFrame1 = function (PositionX, PositionY, PositionZ, Orientation) {
+  let canvasGeo = new THREE.BoxBufferGeometry(50, 70, 6);
+  let canvasMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/flowergirl.jpg') });
+  let canvas = new THREE.Mesh(canvasGeo, canvasMesh);
+
+  let frameAGeo = new THREE.BoxBufferGeometry(60, 8, 10);
+  let frameMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/skulldrawing1.jpg') });
+  let frameTop = new THREE.Mesh(frameAGeo, frameMesh);
+  let frameBottom = new THREE.Mesh(frameAGeo, frameMesh);
+  let frameBGeo = new THREE.BoxBufferGeometry(10, 70, 10)
+  let frameSideA = new THREE.Mesh(frameBGeo, frameMesh);
+  let frameSideB = new THREE.Mesh(frameBGeo, frameMesh);
+
+
+  canvas.add(frameSideA);
+  canvas.add(frameSideB);
+  canvas.add(frameBottom);
+  canvas.add(frameTop);
+
+  frameSideA.position.set(25, 0, 0)
+  frameSideB.position.set(-25, 0, 0)
+  frameTop.position.set(0, 38, 0)
+  frameBottom.position.set(0, -38, 0)
+
+
+  return canvas;
+};
+THREE.pFrame2 = function (PositionX, PositionY, PositionZ, Orientation) {
+  let canvasGeo = new THREE.BoxBufferGeometry(50, 70, 6);
+  let canvasMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/flowergirl.jpg') });
+  let canvas = new THREE.Mesh(canvasGeo, canvasMesh);
+
+  let frameAGeo = new THREE.BoxBufferGeometry(60, 8, 10);
+  let frameMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg') });
+  let frameTop = new THREE.Mesh(frameAGeo, frameMesh);
+  let frameBottom = new THREE.Mesh(frameAGeo, frameMesh);
+  let frameBGeo = new THREE.BoxBufferGeometry(10, 70, 10)
+  let frameSideA = new THREE.Mesh(frameBGeo, frameMesh);
+  let frameSideB = new THREE.Mesh(frameBGeo, frameMesh);
+
+
+  canvas.add(frameSideA);
+  canvas.add(frameSideB);
+  canvas.add(frameBottom);
+  canvas.add(frameTop);
+
+  frameSideA.position.set(25, 0, 0)
+  frameSideB.position.set(-25, 0, 0)
+  frameTop.position.set(0, 38, 0)
+  frameBottom.position.set(0, -38, 0)
+
+
+
+  return canvas;
+};
+
+THREE.pFrame3 = function (PositionX, PositionY, PositionZ, Orientation) {
+  let canvasGeo = new THREE.BoxBufferGeometry(50, 70, 6);
+  let canvasMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/stbart.jpg') });
+  let canvas = new THREE.Mesh(canvasGeo, canvasMesh);
+
+  let frameAGeo = new THREE.BoxBufferGeometry(60, 8, 10);
+  let frameMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg') });
+  let frameTop = new THREE.Mesh(frameAGeo, frameMesh);
+  let frameBottom = new THREE.Mesh(frameAGeo, frameMesh);
+  let frameBGeo = new THREE.BoxBufferGeometry(10, 70, 10)
+  let frameSideA = new THREE.Mesh(frameBGeo, frameMesh);
+  let frameSideB = new THREE.Mesh(frameBGeo, frameMesh);
+
+
+  canvas.add(frameSideA);
+  canvas.add(frameSideB);
+  canvas.add(frameBottom);
+  canvas.add(frameTop);
+
+  frameSideA.position.set(25, 0, 0)
+  frameSideB.position.set(-25, 0, 0)
+  frameTop.position.set(0, 38, 0)
+  frameBottom.position.set(0, -38, 0)
+
+  return canvas
+};
+
 //wheelchair
 THREE.wheelChair = function (PositionX, PositionY, PositionZ, Orientation) {
   let wheelGeo = new THREE.CylinderBufferGeometry(50 * 1.8, 50 * 1.8, 4 * 1.8, 24);
@@ -217,7 +300,7 @@ THREE.toolsTable = function (PositionX, PositionY, PositionZ, Orientation) {
 // door frame
 
 THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
-  
+
 
   let pivot = new THREE.BoxBufferGeometry(1, 1, 1);
   let pivotMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/door931-fixed.jpg') });
@@ -227,7 +310,7 @@ THREE.doorSimple = function (PositionX, PositionY, PositionZ, Orientation) {
     pivotPoint.rotateY(Math.PI / Orientation);
   }
   else if (Orientation === 1) {
-    pivotPoint.position.set(PositionX-100, PositionY, PositionZ);
+    pivotPoint.position.set(PositionX - 100, PositionY, PositionZ);
   }
 
 
@@ -371,7 +454,7 @@ THREE.bed = function (PositionX, PositionY, PositionZ, Orientation) {
   bedLeg4.position.set(-120 * 2.5, -30 * 2.5, -60 * 2.5);
 
   let headboardGeo = new THREE.BoxGeometry(15 * 2.5, 90 * 2.5, 132 * 2.5);
-  let headboardMesh = new THREE.MeshLambertMaterial({ color: 0xfa35cd });
+  let headboardMesh = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture('./assets/images/woodtable1.jpg') });
   let headboard = new THREE.Mesh(headboardGeo, headboardMesh);
   mattress.add(headboard);
   headboard.position.set(-122 * 2.5, 30 * 2.5, 0)
@@ -388,10 +471,10 @@ THREE.wall = function (Xcoord1, Xcoord2, HEIGHT, Zcoord1, Zcoord2) {
   zPosition = (Zcoord1 + Zcoord2) / 2;
 
   let wallsizing = new THREE.BoxGeometry(xLength, HEIGHT, zLength);
-  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/wallb.jpg") });
+  let wallskin = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("./assets/images/bricksseamless.jpg") });
   let wallpiece = new THREE.Mesh(wallsizing, wallskin);
 
-  wallpiece.position.set(xPosition, HEIGHT/2, zPosition);
+  wallpiece.position.set(xPosition, HEIGHT / 2, zPosition);
   return wallpiece;
 };
 
